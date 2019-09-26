@@ -17,4 +17,3 @@ Game for Web Programming
 -(think rock/paper/scissors)
 
 (Additional features: let squares be individially coloured to make pictures/messages [see Reddit Place])
-xyz
