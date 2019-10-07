@@ -1,11 +1,11 @@
-var numberOfRows = 10;
-var numberOfColumns = 10;
+var numberOfRows = 20;
+var numberOfColumns = 30;
 
 var selectedColour = "blue";
 
 
 
-//create 2d array for grid data
+//2d array for grid data (make this track the owners)
 var gridData = new Array(numberOfColumns);
 
 for (var i = 0; i < numberOfColumns; i++) {
@@ -13,12 +13,21 @@ for (var i = 0; i < numberOfColumns; i++) {
 };
 
 
-//create 2d array for grid cells
+//2d array for grid cells
 var gridCell = new Array(numberOfColumns);
 
 for (var i = 0; i < numberOfColumns; i++) {
 	gridCell[i] = new Array(numberOfRows);
 };
+
+
+//2d array for cell colours
+var gridColour = new Array(numberOfColumns);
+
+for (var i = 0; i < numberOfColumns; i++) {
+	gridCell[i] = new Array(numberOfRows);
+};
+
 
 
 //generates grid     
