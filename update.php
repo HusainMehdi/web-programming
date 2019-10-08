@@ -5,21 +5,23 @@ $conn = mysqli_connect('localhost', 'root', '123456', 'grid');
 
 echo 'Processing.....';
 
-echo $_POST['number'];
-
 //Check for POST variable
- if (isset($_POST['number'])) {
+ if (isset($_POST['hilighted'])) {
     // $hilighted = mysqli_real_escape_string($conn, $_POST['hilighted']);
-     $number = mysqli_real_escape_string($conn, $_POST['number']);
+     $col = mysqli_real_escape_string($conn, $_POST['col']);
+     $row = mysqli_real_escape_string($conn, $_POST['row']);
+
      $hilighted = mysqli_real_escape_string($conn, $_POST['hilighted']);
 
 
 
 
-    $query = "UPDATE `grid numbers` SET `hilighted` = $hilighted WHERE `number` = $number;";
+    $query = "UPDATE `gridcells` SET `hilighted` = $hilighted WHERE `col` = $col AND `row` =$row;";
 
+    //send back the updated cell
     if (mysqli_query($conn, $query)) {
-        echo 'update success...';
+        $updatedCell = array("col"=>$col, "row"=>$row);
+        echo json_encode($updatedCell);;
     } else {
         echo 'ERROR: ' . mysqli_error($conn);
     }

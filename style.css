@@ -1,3 +1,4 @@
+  
 .grid { margin:1em auto; border-collapse:collapse }
 .grid td {
     cursor:pointer;
@@ -8,5 +9,10 @@
 }
 .grid td.clicked {
     background-color:yellow;
+    font-weight:bold; color:red;
+}
+
+.grid td.mine{
+	    background-color:green;
     font-weight:bold; color:red;
 }

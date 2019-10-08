@@ -5,7 +5,7 @@ $conn = mysqli_connect('localhost', 'root', '123456', 'grid');
 
 echo 'Processing.....';
 
-    $query = "UPDATE `grid numbers` SET `hilighted` = FALSE";
+    $query = "UPDATE `gridcells` SET `hilighted` = FALSE";
 
     if (mysqli_query($conn, $query)) {
         echo 'db cleared...';
