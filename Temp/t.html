@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="text"></div>
+    <script>
+        var output =''
+        for (var i = 0; i <= 99; i++) {
+            output += 'INSERT INTO `grid numbers`(`number`, `hilighted`) VALUES ('+i+', FALSE);</p>';
+            
+        }
+        document.getElementById('text').innerHTML = output;
+    </script>
+</body>
+
+</html>
