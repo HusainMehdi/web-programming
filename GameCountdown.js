@@ -30,20 +30,20 @@ function initializeClock(id, endtime) {
 }
 
 // if there's a cookie with the name myClock, use that value as the deadline
-if (document.cookie && document.cookie.match('myClock')) {
+// (document.cookie && document.cookie.match('myClock')) {
   // get deadline value from cookie
-  var deadline = document.cookie.match(/(^|;)myClock=([^;]+)/)[2];
-}
+  v// deadline = document.cookie.match(/(^|;)myClock=([^;]+)/)[2];
+//
 
 // otherwise, set a deadline 10 minutes from now and 
 // save it in a cookie with that name
-else {
+//else {
   // create deadline 10 minutes from now
-  var timeInMinutes = 5;
-  var currentTime = Date.parse(new Date());
-  var deadline = new Date(currentTime + timeInMinutes * 60 * 1000);
+ // var timeInMinutes = 5;
+ // var currentTime = Date.parse(new Date());
+ // var deadline = new Date(currentTime + timeInMinutes * 60 * 1000);
 
   // store deadline in cookie for future reference
-  document.cookie = 'myClock=' + deadline + '; path=/; domain=.placeholder.com';
+ // document.cookie = 'myClock=' + deadline + '; path=/; domain=.placeholder.com';
 }
 initializeClock('clockdiv', deadline);
