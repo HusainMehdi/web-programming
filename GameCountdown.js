@@ -32,7 +32,7 @@ function initializeClock(id, endtime) {
 // if there's a cookie with the name myClock, use that value as the deadline
 // (document.cookie && document.cookie.match('myClock')) {
   // get deadline value from cookie
-  v// deadline = document.cookie.match(/(^|;)myClock=([^;]+)/)[2];
+  // deadline = document.cookie.match(/(^|;)myClock=([^;]+)/)[2];
 //
 
 // otherwise, set a deadline 10 minutes from now and 
