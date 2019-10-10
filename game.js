@@ -13,6 +13,14 @@ var playerName = prompt("Please enter your name");
 
 
 
+//time of last click
+var clickTime;
+
+//true if cooldown time has elapsed
+var clickAvailable = true;
+
+
+
 
 //2d array for grid data (make this track the owners)
 var gridOwner = new Array(numberOfColumns);
