@@ -35,6 +35,8 @@ function initializeClock(id, endtime) {
   var timeinterval = setInterval(updateClock, 1000);
 }
 
+//IGNORE THIS FOR NOW vvvv
+
 // if there's a cookie with the name myClock, use that value as the deadline
 // (document.cookie && document.cookie.match('myClock')) {
   // get deadline value from cookie
@@ -51,6 +53,8 @@ function initializeClock(id, endtime) {
 
   // store deadline in cookie for future reference
  // document.cookie = 'myClock=' + deadline + '; path=/; domain=.placeholder.com';
+
+//IGNORE THIS FOR NOW^^^^
 }
 
 //This part is what calls the initializeClock function on the site so that the timer will start counting down.
