@@ -24,3 +24,5 @@ Game for Web Programming
 -(think rock/paper/scissors)
 
 (Additional features: let squares be individially coloured to make pictures/messages [see Reddit Place])
+
+TO-DO: Move countdown timer to be using database, improve login system / integrate it with countdown timer so it can be consistent across browsers, get different colours on squares working, security measures to stop exploiting, testing and more (Add anything that also needs done)
