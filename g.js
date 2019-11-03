@@ -69,6 +69,7 @@ function clickableGrid(rows, cols, callback) {
 const startX = Math.floor(Math.random() * 10)
 const startY = Math.floor(Math.random() * 10)
 gridData[startX][startY] = "mine";
+//Update db with starting position
 updateDB('TRUE', '' + startX, '' + startY);
 
 
