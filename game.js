@@ -115,16 +115,12 @@ var grid = clickableGrid(numberOfRows, numberOfColumns, function (el, row, col, 
             gridOwner[col][row] = playerName;
             changeColour(selectedColour, col, row);
             gridState[col][row] = playerState;
-            //Callum-edit::
-            updateDB('TRUE', '' + col, '' + row);
         }
         else if (col == 0) {
             if (gridOwner[col + 1][row] == playerName) {
                 gridOwner[col][row] = playerName;
                 changeColour(selectedColour, col, row);
                 gridState[col][row] = playerState;
-                //Callum-edit::
-                updateDB('TRUE', '' + col, '' + row);
             }
         }
         else if (col == numberOfColumns - 1) {
@@ -132,20 +128,17 @@ var grid = clickableGrid(numberOfRows, numberOfColumns, function (el, row, col, 
                 gridOwner[col][row] = playerName;
                 changeColour(selectedColour, col, row);
                 gridState[col][row] = playerState;
-                //Callum-edit::
-                updateDB('TRUE', '' + col, '' + row);
             }
         }
         else if (gridOwner[col + 1][row] == playerName || gridOwner[col - 1][row] == playerName) {
             gridOwner[col][row] = playerName;
             changeColour(selectedColour, col, row);
             gridState[col][row] = playerState;
-            //Callum-edit::
-            updateDB('TRUE', '' + col, '' + row);
         }
 
     }
-
+    //Callum-edit::
+    updateDB('TRUE', '' + col, '' + row);
 
     //debug: print coord of clicked 
     console.log(col, row);
