@@ -87,7 +87,7 @@ function clickableGrid( rows, cols, callback ){
 
 //temp: on load, select random starting square
 
-gridOwner[Math.floor(Math.random() * 10)][Math.floor(Math.random() * 10)] = playerName;
+gridOwner[Math.floor(Math.random() * numberOfColumns)][Math.floor(Math.random() * numberOfRows)] = playerName;
 
 
 //change colour of cell to selectedColour
@@ -96,6 +96,15 @@ function changeColour(colour, col, row){
 	gridColour[col][row] = colour;
 }
 
+//change selected colour
+function selectColour() {
+  selectedColour = document.getElementById("colourSelector").value;
+}
+
+//change selected state
+function selectState() {
+    playerState = document.getElementById("stateSelector").value;
+  }
 
 //when cell is clicked, check adjacent cell then change
 var lastClicked;
@@ -171,7 +180,7 @@ setInterval(function(){ for (var i = 0; i < numberOfColumns; i++) {
 
 
 
-//test multiplayer interaction
+//test multiplayer interaction - delete later
 
 function testPlace(col, row, colour, owner, state){
 	gridOwner[col][row] = owner;
