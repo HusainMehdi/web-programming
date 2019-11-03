@@ -1,0 +1,23 @@
+1. Install XAMMP
+	- Virtual Apache server and MySQL
+https://www.youtube.com/watch?v=6tCWiexc05U
+
+2. Move this repo into (windows) C:\xampp\htdocs
+		       (mac) /.../wherever mac puts htdocs
+
+3. Import DB (the .sql file found in this repo) using phpMyAdmin
+
+	- Rename the DB to: grid (if not already named that)
+	- Set DB password to: 123456 (if not already set)
+
+4. In your browser, enter url: http://localhost/name-of-this-repo/
+
+The wesite should now load and you should now have access to your own copy of the DB
+
+To check that DB is connected:
+	1. open http://localhost/name-of-this-repo/ in two browser tabs
+	2. click on cells in the grid to hilight them
+	3. If the newly hilighted cells are appearing in both tabs, the db is working.
+
+Note all work you do on this repo that involves the DB in anyway must be done 
+inside /.../htdocs, using the localhost url to check your results.

@@ -1,3 +1,0 @@
-1. Connect this ver to db
-2. Upload to public html and
-3. Edit the game, (movement on timer)
