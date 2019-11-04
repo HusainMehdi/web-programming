@@ -1,7 +1,7 @@
 <?php
 
 // Connect to a database
-$conn = mysqli_connect('localhost', 'root', '123456', 'grid');
+require('db.php');
 
 echo 'Processing.....';
 
