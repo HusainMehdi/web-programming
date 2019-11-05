@@ -1,6 +1,3 @@
-//callum edit:: wipe DB on refresh::
-clearDB();
-
 //size of grid
 var numberOfRows = 20;
 var numberOfColumns = 30;
@@ -8,8 +5,8 @@ var numberOfColumns = 30;
 //colour for next clicked cell
 var selectedColour = "blue";
 
-//state for all owned cells (rock/paper/scissors)
-var playerState = "scissors";
+//state for all owned cells (Rock/Paper/Scissors)
+var playerState = "Scissors";
 
 //player's username - retrieved from database if existing user
 var playerName = prompt("Please enter your name");
@@ -46,7 +43,7 @@ for (var i = 0; i < numberOfColumns; i++) {
     gridColour[i] = new Array(numberOfRows);
 };
 
-//2d array for cell states (rock/paper/scissors)
+//2d array for cell states (Rock/Paper/Scissors)
 var gridState = new Array(numberOfColumns);
 
 for (var i = 0; i < numberOfColumns; i++) {
@@ -105,19 +102,40 @@ function changeColour(colour, col, row) {
 //change selected colour
 function selectColour() {
     selectedColour = document.getElementById("colourSelector").value;
+
+    for (var i = 0; i < gridColour.length; i++) {
+        for (var j = 0; j < gridColour[i].length; j++) {
+            if (gridOwner[i][j] == playerName)
+                changeColour(selectedColour, i, j)
+                updateDB('TRUE', '' + i, '' + j);
+        }
+    }
+
 }
 
 //change selected state
 function selectState() {
     playerState = document.getElementById("stateSelector").value;
+    //capitalise
+    playerState = playerState.charAt(0).toUpperCase() + playerState.slice(1);
+
+    for (var i = 0; i < gridState.length; i++) {
+        for (var j = 0; j < gridState[i].length; j++) {
+            if (gridOwner[i][j] == playerName) {
+                gridState[i][j] = playerState;
+                updateDB('TRUE', '' + i, '' + j);
+            }
+        }
+    }
 }
 
 //when cell is clicked, check adjacent cell then change
 var lastClicked;
 var grid = clickableGrid(numberOfRows, numberOfColumns, function (el, row, col, i) {
     //check adjacent cells type
-    if ((gridState[col][row] == undefined) || (gridState[col][row] == "scissors" && playerState == "rock") || (gridState[col][row] == "paper" && playerState == "scissors") || (gridState[col][row] == "rock" && playerState == "paper")) {
+    if ((gridState[col][row] == "") || (gridState[col][row] == "Scissors" && playerState == "Rock") || (gridState[col][row] == "Paper" && playerState == "Scissors") || (gridState[col][row] == "Rock" && playerState == "Paper")) {
 
+        console.log("---------------------")
         //check adjacent cells ownership (error when out of limits )
         if (gridOwner[col][row + 1] == playerName || gridOwner[col][row - 1] == playerName || gridOwner[col][row] == playerName) {
             gridOwner[col][row] = playerName;
@@ -155,7 +173,7 @@ var grid = clickableGrid(numberOfRows, numberOfColumns, function (el, row, col, 
     }
 
     //debug: print coord of clicked 
-    console.log(col, row);
+    console.log(getCell(col, row));
 
     //change colour
     //el.className='clicked';
@@ -187,7 +205,7 @@ setInterval(function () {
             else if (gridOwner[i][j] != null) {
                 gridCell[i][j].innerHTML = gridOwner[i][j];
                 gridCell[i][j].style.background = gridColour[i][j];
-                gridCell[i][j].style.borderWidth = "0px 0px 0px 0px";
+                gridCell[i][j].style.borderWidth = "1px 1px 1px 1px";
             }
         };
     };
@@ -206,83 +224,100 @@ function testPlace(col, row, colour, owner, state) {
 
 (function () {
     console.log(Date.now());
-    testPlace(19, 9, "red", "P2", "rock");
-    testPlace(20, 9, "red", "P2", "rock");
-    testPlace(21, 9, "red", "P2", "rock");
-    testPlace(22, 9, "red", "P2", "rock");
-    testPlace(23, 9, "red", "P2", "rock");
-    testPlace(24, 9, "red", "P2", "rock");
-    testPlace(18, 10, "red", "P2", "rock");
-    testPlace(19, 10, "red", "P2", "rock");
-    testPlace(20, 10, "red", "P2", "rock");
-    testPlace(21, 10, "red", "P2", "rock");
-    testPlace(22, 10, "red", "P2", "rock");
-    testPlace(23, 10, "red", "P2", "rock");
-    testPlace(24, 10, "red", "P2", "rock");
-    testPlace(25, 10, "red", "P2", "rock");
-    testPlace(26, 10, "red", "P2", "rock");
-    testPlace(27, 10, "red", "P2", "rock");
-    testPlace(18, 11, "brown", "P2", "rock");
-    testPlace(19, 11, "brown", "P2", "rock");
-    testPlace(20, 11, "brown", "P2", "rock");
-    testPlace(21, 11, "NavajoWhite", "P2", "rock");
-    testPlace(22, 11, "NavajoWhite", "P2", "rock");
-    testPlace(23, 11, "NavajoWhite", "P2", "rock");
-    testPlace(24, 11, "black", "P2", "rock");
-    testPlace(25, 11, "NavajoWhite", "P2", "rock");
-    testPlace(17, 12, "brown", "P2", "rock");
-    testPlace(18, 12, "NavajoWhite", "P2", "rock");
-    testPlace(19, 12, "brown", "P2", "rock");
-    testPlace(20, 12, "NavajoWhite", "P2", "rock");
-    testPlace(21, 12, "NavajoWhite", "P2", "rock");
-    testPlace(22, 12, "NavajoWhite", "P2", "rock");
-    testPlace(23, 12, "NavajoWhite", "P2", "rock");
-    testPlace(24, 12, "black", "P2", "rock");
-    testPlace(25, 12, "NavajoWhite", "P2", "rock");
-    testPlace(26, 12, "NavajoWhite", "P2", "rock");
-    testPlace(27, 12, "NavajoWhite", "P2", "rock");
-    testPlace(17, 13, "brown", "P2", "rock");
-    testPlace(18, 13, "NavajoWhite", "P2", "rock");
-    testPlace(19, 13, "brown", "P2", "rock");
-    testPlace(20, 13, "brown", "P2", "rock");
-    testPlace(21, 13, "NavajoWhite", "P2", "rock");
-    testPlace(22, 13, "NavajoWhite", "P2", "rock");
-    testPlace(23, 13, "NavajoWhite", "P2", "rock");
-    testPlace(24, 13, "NavajoWhite", "P2", "rock");
-    testPlace(25, 13, "brown", "P2", "rock");
-    testPlace(26, 13, "NavajoWhite", "P2", "rock");
-    testPlace(27, 13, "NavajoWhite", "P2", "rock");
-    testPlace(28, 13, "NavajoWhite", "P2", "rock");
-    testPlace(17, 14, "brown", "P2", "rock");
-    testPlace(18, 14, "brown", "P2", "rock");
-    testPlace(19, 14, "NavajoWhite", "P2", "rock");
-    testPlace(20, 14, "NavajoWhite", "P2", "rock");
-    testPlace(21, 14, "NavajoWhite", "P2", "rock");
-    testPlace(22, 14, "NavajoWhite", "P2", "rock");
-    testPlace(23, 14, "NavajoWhite", "P2", "rock");
-    testPlace(24, 14, "brown", "P2", "rock");
-    testPlace(25, 14, "brown", "P2", "rock");
-    testPlace(26, 14, "brown", "P2", "rock");
-    testPlace(27, 14, "Brown", "P2", "rock");
-    testPlace(19, 15, "NavajoWhite", "P2", "rock");
-    testPlace(20, 15, "NavajoWhite", "P2", "rock");
-    testPlace(21, 15, "NavajoWhite", "P2", "rock");
-    testPlace(22, 15, "NavajoWhite", "P2", "rock");
-    testPlace(23, 15, "NavajoWhite", "P2", "rock");
-    testPlace(24, 15, "NavajoWhite", "P2", "rock");
-    testPlace(25, 15, "NavajoWhite", "P2", "rock");
-    testPlace(26, 15, "NavajoWhite", "P2", "rock");
+    testPlace(19, 9, "red", "P2", "Rock");
+    testPlace(20, 9, "red", "P2", "Rock");
+    testPlace(21, 9, "red", "P2", "Rock");
+    testPlace(22, 9, "red", "P2", "Rock");
+    testPlace(23, 9, "red", "P2", "Rock");
+    testPlace(24, 9, "red", "P2", "Rock");
+    testPlace(18, 10, "red", "P2", "Rock");
+    testPlace(19, 10, "red", "P2", "Rock");
+    testPlace(20, 10, "red", "P2", "Rock");
+    testPlace(21, 10, "red", "P2", "Rock");
+    testPlace(22, 10, "red", "P2", "Rock");
+    testPlace(23, 10, "red", "P2", "Rock");
+    testPlace(24, 10, "red", "P2", "Rock");
+    testPlace(25, 10, "red", "P2", "Rock");
+    testPlace(26, 10, "red", "P2", "Rock");
+    testPlace(27, 10, "red", "P2", "Rock");
+    testPlace(18, 11, "brown", "P2", "Rock");
+    testPlace(19, 11, "brown", "P2", "Rock");
+    testPlace(20, 11, "brown", "P2", "Rock");
+    testPlace(21, 11, "NavajoWhite", "P2", "Rock");
+    testPlace(22, 11, "NavajoWhite", "P2", "Rock");
+    testPlace(23, 11, "NavajoWhite", "P2", "Rock");
+    testPlace(24, 11, "black", "P2", "Rock");
+    testPlace(25, 11, "NavajoWhite", "P2", "Rock");
+    testPlace(17, 12, "brown", "P2", "Rock");
+    testPlace(18, 12, "NavajoWhite", "P2", "Rock");
+    testPlace(19, 12, "brown", "P2", "Rock");
+    testPlace(20, 12, "NavajoWhite", "P2", "Rock");
+    testPlace(21, 12, "NavajoWhite", "P2", "Rock");
+    testPlace(22, 12, "NavajoWhite", "P2", "Rock");
+    testPlace(23, 12, "NavajoWhite", "P2", "Rock");
+    testPlace(24, 12, "black", "P2", "Rock");
+    testPlace(25, 12, "NavajoWhite", "P2", "Rock");
+    testPlace(26, 12, "NavajoWhite", "P2", "Rock");
+    testPlace(27, 12, "NavajoWhite", "P2", "Rock");
+    testPlace(17, 13, "brown", "P2", "Rock");
+    testPlace(18, 13, "NavajoWhite", "P2", "Rock");
+    testPlace(19, 13, "brown", "P2", "Rock");
+    testPlace(20, 13, "brown", "P2", "Rock");
+    testPlace(21, 13, "NavajoWhite", "P2", "Rock");
+    testPlace(22, 13, "NavajoWhite", "P2", "Rock");
+    testPlace(23, 13, "NavajoWhite", "P2", "Rock");
+    testPlace(24, 13, "NavajoWhite", "P2", "Rock");
+    testPlace(25, 13, "brown", "P2", "Rock");
+    testPlace(26, 13, "NavajoWhite", "P2", "Rock");
+    testPlace(27, 13, "NavajoWhite", "P2", "Rock");
+    testPlace(28, 13, "NavajoWhite", "P2", "Rock");
+    testPlace(17, 14, "brown", "P2", "Rock");
+    testPlace(18, 14, "brown", "P2", "Rock");
+    testPlace(19, 14, "NavajoWhite", "P2", "Rock");
+    testPlace(20, 14, "NavajoWhite", "P2", "Rock");
+    testPlace(21, 14, "NavajoWhite", "P2", "Rock");
+    testPlace(22, 14, "NavajoWhite", "P2", "Rock");
+    testPlace(23, 14, "NavajoWhite", "P2", "Rock");
+    testPlace(24, 14, "brown", "P2", "Rock");
+    testPlace(25, 14, "brown", "P2", "Rock");
+    testPlace(26, 14, "brown", "P2", "Rock");
+    testPlace(27, 14, "Brown", "P2", "Rock");
+    testPlace(19, 15, "NavajoWhite", "P2", "Rock");
+    testPlace(20, 15, "NavajoWhite", "P2", "Rock");
+    testPlace(21, 15, "NavajoWhite", "P2", "Rock");
+    testPlace(22, 15, "NavajoWhite", "P2", "Rock");
+    testPlace(23, 15, "NavajoWhite", "P2", "Rock");
+    testPlace(24, 15, "NavajoWhite", "P2", "Rock");
+    testPlace(25, 15, "NavajoWhite", "P2", "Rock");
+    testPlace(26, 15, "NavajoWhite", "P2", "Rock");
 })();
 
 //TO DO: Selector for colours, 2D array for grid colour, modify gridOwner to be gridOwner(owner of cells, compare own username with cells),
 // check that selected grid ownership/ colour is different 
 
 
-
 //--------------Database Link start-----------------
+
+function getCell(col, row) {
+    return {
+        owner: gridOwner[col][row],
+        colour: gridColour[col][row],
+        state: gridState[col][row],
+    }
+}
+
+function setCell(cell) {
+    var col = cell.col;
+    var row = cell.row;
+    gridOwner[col][row] = "" + cell.owner;
+    gridColour[col][row] = "" + cell.colour;
+    gridState[col][row] = "" + cell.state;
+}
+
 function updateDB(hilighted, col, row) {
+    cell = getCell(col, row);
     //convert data to named strings which PHP will recognise
-    var params = "hilighted=" + hilighted + "&col=" + col + "&row=" + row;
+    var params = "hilighted=" + hilighted + "&col=" + col + "&row=" + row + "&owner=" + cell.owner + "&colour=" + cell.colour + "&state=" + cell.state;
 
     var xhr = new XMLHttpRequest();
 
@@ -311,14 +346,14 @@ function getFromDB() {
 
     xhr.onload = function () {
         if (this.status == 200) {
-            console.log(this.responseText);
+            // console.log(this.responseText);
             var gridFromDB = JSON.parse(this.responseText);
-            for (var cell in gridFromDB) {
-                if (gridFromDB[cell].hilighted == "1")
-                    changeColour(selectedColour, parseInt(gridFromDB[cell].col, 10), parseInt(gridFromDB[cell].row, 10));
+            // console.log(gridFromDB);
+            for (var i = 0; i < gridFromDB.length; i++) {
+                setCell(gridFromDB[i]);
+                // if (gridFromDB[cell].hilighted == "1")
+                //     changeColour(selectedColour, parseInt(gridFromDB[cell].col, 10), parseInt(gridFromDB[cell].row, 10));
             }
-
-
         }
     }
     xhr.send();
