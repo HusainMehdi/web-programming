@@ -50,3 +50,5 @@ function initializeClock(id, endtime) {
 
 //IGNORE THIS FOR NOW^^^^
 }
+
+initializeClock('clockdiv', deadline);
