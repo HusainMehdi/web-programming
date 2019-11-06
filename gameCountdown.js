@@ -33,6 +33,7 @@ function initializeClock(id, endtime) {
   //This part updates the clock every 1000 milliseconds, using the timeInterval variable to to this.
   updateClock();
   var timeinterval = setInterval(updateClock, 1000);
+ }
 }
 
 //This part is what calls the initializeClock function on the site so that the timer will start counting down.
