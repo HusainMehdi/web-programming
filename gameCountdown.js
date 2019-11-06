@@ -36,4 +36,4 @@ function initializeClock(id, endtime) {
 }
 
 //This part is what calls the initializeClock function on the site so that the timer will start counting down.
-initializeClock('clockdiv', deadline);
+initializeClock('clockdiv');
