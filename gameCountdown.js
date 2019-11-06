@@ -34,7 +34,6 @@ function initializeClock(id, endtime) {
   updateClock();
   var timeinterval = setInterval(updateClock, 1000);
  }
-}
 
 //This part is what calls the initializeClock function on the site so that the timer will start counting down.
 initializeClock('clockdiv');
