@@ -103,12 +103,12 @@ function changeColour(colour, col, row) {
 function selectColour() {
     selectedColour = document.getElementById("colourSelector").value;
 
-    for (var i = 0; i < gridColour.length; i++) {
-        for (var j = 0; j < gridColour[i].length; j++) {
-            if (gridOwner[i][j] == playerName)
-                changeColour(selectedColour, i, j)
-                updateDB('TRUE', '' + i, '' + j);
-        }
+    // for (var i = 0; i < gridColour.length; i++) {
+    //     for (var j = 0; j < gridColour[i].length; j++) {
+    //         if (gridOwner[i][j] == playerName)
+    //             changeColour(selectedColour, i, j)
+    //             updateDB('TRUE', '' + i, '' + j);
+    //     }
     }
 
 }
