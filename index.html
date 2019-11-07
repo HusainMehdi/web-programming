@@ -6,32 +6,8 @@
 		  </head>
 		  
 		  <body>
-		  
-		  <form action="action_page.php" method="post">
-           <!-- <div class="imgcontainer">
-            <img src="img_avatar2.png" alt="Avatar" class="avatar">
-            </div>-->
-        
-            <div class="container">
-            <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
-        
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
-        
-            <button type="submit">Login</button>
-            <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-            </label>
-            </div>
-        
-            <div class="container" style="background-color:#f1f1f1">
-            <button type="button" class="cancelbtn">Cancel</button>
-            <span class="psw">Forgot <a href="#">password?</a></span>
-            </div>
-        </form>
-		  
-			  <h1>Square Game</h1>
+			
+			  <h1>Grid Conquest</h1>
 			  <div id="clockdiv">
   <div>
     <span class="minutes"></span>
@@ -42,11 +18,27 @@
     <div class="smalltext">Seconds</div>
   </div>
 </div>
-
+        
 <div id='countdown'>
 </div>
 
+		  		<select id="colourSelector" onchange="selectColour()">
+				  <option value="Blue">blue</option>
+				  <option value="Green">green</option>
+				  <option value="Yellow">yellow</option>
+				  <option value="Red">Red</option>
+				  <option value="Orange">Orange</option>
+				  <option value="Purple">Purple</option>
+				  <option value="Brown">Brown</option>
+				  <option value="NavajoWhite">Tan</option>
+				</select>
+				<select id="stateSelector" onchange="selectState()">
+					<option value="Rock">rock</option>
+					<option value="Paper">paper</option>
+					<option value="Scissors">scissors</option>
+				  </select>
 		  </body>
 		  <script src="game.js"></script>
-	      <script src="GameCountdown.js"></script>
+		  <script src="gameCountdown.js"></script>
+
   </html>

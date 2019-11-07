@@ -1,6 +1,8 @@
 # web-programming
 Game for Web Programming
 
+Current Active Version: http://www2.macs.hw.ac.uk/~cw78/web-programming/
+
 -MMO
 
 -Grid based
