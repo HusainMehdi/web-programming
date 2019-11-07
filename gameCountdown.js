@@ -26,7 +26,8 @@ function initializeClock(id, endtime) {
   }
 
   updateClock();
-  var timeinterval = setInterval(updateClock, 1000);
+         document.getElementById("demo").innerHTML = --c;
+         var timeinterval = setInterval(updateClock, 1000);
 }
 
 // if there's a cookie with the name myClock, use that value as the deadline
@@ -47,3 +48,4 @@ else {
   document.cookie = 'myClock=' + deadline + '; path=/; domain=.placeholder.com';
 }
 initializeClock('clockdiv', deadline);
+<button onclick="initializeClock(); document.getElementById('demo').innerHTML='5';">Start counter</button>
