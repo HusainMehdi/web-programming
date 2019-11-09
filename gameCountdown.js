@@ -33,7 +33,29 @@ function initializeClock(id, endtime) {
   //This part updates the clock every 1000 milliseconds, using the timeInterval variable to to this.
   updateClock();
   var timeinterval = setInterval(updateClock, 1000);
- }
+}
+
+//IGNORE THIS FOR NOW vvvv
+
+// if there's a cookie with the name myClock, use that value as the deadline
+// (document.cookie && document.cookie.match('myClock')) {
+  // get deadline value from cookie
+  // deadline = document.cookie.match(/(^|;)myClock=([^;]+)/)[2];
+//
+
+// otherwise, set a deadline 10 minutes from now and 
+// save it in a cookie with that name
+//else {
+  // create deadline 10 minutes from now
+ // var timeInMinutes = 5;
+ // var currentTime = Date.parse(new Date());
+ // var deadline = new Date(currentTime + timeInMinutes * 60 * 1000);
+
+  // store deadline in cookie for future reference
+ // document.cookie = 'myClock=' + deadline + '; path=/; domain=.placeholder.com';
+
+//IGNORE THIS FOR NOW^^^^
+}
 
 //This part is what calls the initializeClock function on the site so that the timer will start counting down.
-initializeClock('clockdiv');
+initializeClock('clockdiv', deadline);
