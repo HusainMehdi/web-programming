@@ -4,43 +4,49 @@
     <title>Login to the Game></title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="#" />
   </head>
   <body>
 
     <?php
-        //Creates the variable
-        require_once('init.php');
-	  	$errors = [];
+        require('init.php');
+        //This function checks if the user has already got logged in
+        if (is_logged_in()){
+          echo "<div class='failed'>
+          <h3> You are already logged in!</h3>
+          <br/>
+          <a href='index.php'>Go back</a> Or <a href='logout.php'>Log out</a>
+          </div>";
+        }
+        //Creates the variable for username and password
         $user_name = '';
         $password = '';
         //Checks if user authentication has been done
         if(isset($_POST['user_name'])) {
-			
-			if(is_blank($user_name)) {
-    			$errors[] = "Username cannot be blank.";
-  			}
-			if(is_blank($password)) {
-				$errors[] = "Password cannot be blank.";
-			}
-			
+            //Using the credentials the db is called to check for the results
             $user_name = $_REQUEST['user_name'];
-            $user_name = mysqli_real_escape_string($db_connect,$user_name);
+            $user_name = mysqli_real_escape_string($con,$user_name);
             $password = $_REQUEST['password'];
-            $password = mysqli_real_escape_string($db_connect,$password);
+            $password = mysqli_real_escape_string($con,$password);
 
             $query = "SELECT * FROM 'users' WHERE user_name='$user_name' and password='$password'";
 
-            $result = mysqli_query($db_connect,$query);
-            if(mysqli_num_rows($result) == 1){
-                $session['user_name'] = $user_name;
-                header("Location: index.html");;
+            $result = mysqli_query($con,$query) or die(mysql_error());
+  	        $rows = mysqli_num_rows($result);
+            if($rows==1){
+	             $_SESSION['username'] = $username;
+               //Popup message confirming that the login has been successful
+               echo '<script type="text/javascript">';
+               echo ' alert("You are logged in! Welcome!")';
+               echo '</script>';
+                header("Location: index.php");;
             } else{
                 //Error msg if username or password is incorrect
                 echo "<div class='failed'>
                 <h3> Failed to log in. Username or email doen't match</h3>
                 <br/>
                 <a href='login.php'>Try again</a>
-				<p>Or if you don't have an account,<a href='registration.php'>Register</a>
+				        <p>Or if you don't have an account,<a href='registration.php'>Register</a>
                 </div>";
             }
         }else{
@@ -48,19 +54,18 @@
 
             <div class='login'>
                 <h1>Log In</h1>
-				<?php echo show_errors($errors); ?>
-				
+                <!-- Simple login form -->
                 <form action="login.php" method="post">
                     Username:
                     <br/>
-                    <input type="text" name="user_name" placeholder="Your user name" />
+                    <input type="text" name="user_name" placeholder="Your user name" required/>
                     Password:
                     <br/>
-                    <input type="password" name="password" placeholder="Your Password" />
+                    <input type="password" name="password" placeholder="Your Password" required/>
                     <br/>
                     <input type="submit" name="submit" value="Submit" />
                     </form>
-                    <p><a href="registration.php">Register Here</a> or <a href="index.html">Go Back</a></p>
+                    <p><a href="registration.php">Register Here</a> or <a href="index.php">Go Back</a></p>
                 </div>
             <?php } ?>
 
