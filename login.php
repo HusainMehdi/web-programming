@@ -9,6 +9,7 @@
   <body>
 
     <?php
+        session_start();
         require('init.php');
         //This function checks if the user has already got logged in
         if (is_logged_in()){
@@ -28,11 +29,15 @@
             $user_name = mysqli_real_escape_string($con,$user_name);
             $password = $_REQUEST['password'];
             $password = mysqli_real_escape_string($con,$password);
+            echo $user_name;
+            echo $password;
 
             $query = "SELECT * FROM 'users' WHERE user_name='$user_name' and password='$password'";
-
+            echo "Failed to connect to Database: " . mysqli_connect_error();
             $result = mysqli_query($con,$query) or die(mysql_error());
-  	        $rows = mysqli_num_rows($result);
+            echo $result;
+            $rows = mysqli_num_rows($result);
+            echo $rows;
             if($rows==1){
 	             $_SESSION['username'] = $username;
                //Popup message confirming that the login has been successful

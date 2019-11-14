@@ -8,7 +8,12 @@
 	</head>
 	<body>
 	<?php
+		session_start();
 		require('init.php');
+		$user_name = '';
+		$password = '';
+		$email = '';
+		$check = '';
 
 			if (is_logged_in()){
 				echo "<div class='failed'>
@@ -19,54 +24,69 @@
 			}
 
 
-				$user_name = '';
-        $password = '';
-
 		//Checks if the user name has been used before
 		function uniqueUserName($user_name) {
 			$check = mysqli_real_escape_string($con,$user_name);
+			echo $check;
 			$check = "SELECT * FROM 'users' WHERE username='$user_name'";
+			echo $check;
 			$result = mysqli_query($con, $check);
-    		$count = mysqli_num_rows($result);
+			echo "Failed to connect to Database: " . mysqli_connect_error();
+			$count = mysqli_num_rows($result);
+			echo $count;
     		mysqli_free_result($result);
 			return $admin_count === 0;
 		}
 		//Checks if the email has been used before
 		function uniqueEmail($email) {
 			$check = mysqli_real_escape_string($con,$email);
+			echo $check;
 			$check = "SELECT * FROM 'users' WHERE email='$email'";
+			echo $check;
 			$result = mysqli_query($con, $check);
-    		$count = mysqli_num_rows($result);
+			echo "Failed to connect to Database: " . mysqli_connect_error();
+			echo $result;
+			$count = mysqli_num_rows($result);
+			echo $count;
     		mysqli_free_result($result);
 			return $admin_count === 0;
 		}
 
-
-		//Check if the email is in a valid format
-		function isEmailValid($value) {
-    		$email_regex = '/\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\Z/i';
-    		return preg_match($email_regex, $value) === 1;
-		}
         //Checks if user authentication has been done
         if(isset($_REQUEST['user_name'])) {
-           	$user_name = $_REQUEST['user_name'];
-            $user_name = mysqli_real_escape_string($con,$user_name);
+
+			//Debuging of passed details
+			echo $_REQUEST['user_name'];
+			echo $_REQUEST['password'];
+			echo $_REQUEST['password2'];
+			echo $_REQUEST['email'];
+
+
+			$user_name = $_REQUEST['user_name'];
+			echo $user_name;
+			$user_name = mysqli_real_escape_string($con,$user_name);
+			echo $user_name;
 						if(uniqueUserName($user_name)){
 							$email = $_REQUEST['email'];
+							echo $email;
 							$email = mysqli_real_escape_string($con,$email);
+							echo $email;
 							if(uniqueEmail($email) && isEmailValid($email)){
 								$password = $_REQUEST['password'];
-            		$password = mysqli_real_escape_string($con,$password);
+								echo $password;
+								$password = mysqli_real_escape_string($con,$password);
+								echo $password;
 
 								$query = "INSERT into 'users' (user_name, password, email) VALUES ('$user_name, $password, $email')";
+								echo $query;
 
-            		if(mysqli_query($con,$query)){
-                	$_SESSION['user_name'] = $user_name;
+            					if(mysqli_query($con,$query)){
+                					$_SESSION['user_name'] = $user_name;
 									echo '<script type="text/javascript">';
 									echo ' alert("Registration successful! Welcome!")';
 									echo '</script>';
-                	header("Location: index.php");;
-				}
+                					header("Location: index.php");;
+									}
 
 			}
           } else{
