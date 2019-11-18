@@ -73,16 +73,19 @@ class DBCommands {
         xhr.send(params);
     }
 
-    updatePlayerStatus(username, x, y){
-        var params = "&username=" + username+ "&x=" + x+ "&y=" + y;
+    updatePlayerStatus(username, x, y, callback) {
+        var params = "&username=" + username + "&x=" + x + "&y=" + y;
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'PHP/updatePlayerStatus.php', true);
         //set content type we're posting
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.onload = function () {
-            // if (this.status == 200) {
-            //     console.log(this.responseText);
-            // }
+            if (this.status == 200) {
+                // console.log(this.responseText);
+                var playerData = JSON.parse(this.responseText);
+                // console.log(playerData);
+                callback(playerData);
+            }
         }
         xhr.send(params);
     }
