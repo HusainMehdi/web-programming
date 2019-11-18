@@ -91,7 +91,6 @@ class DBCommands {
     }
 
     getPlayerId(username, callback) {
-        console.log(username);
         var params = "&username=" + username;
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'PHP/getPlayerId.php', true);
@@ -99,10 +98,36 @@ class DBCommands {
         xhr.onload = function () {
             if (this.status == 200) {
                 var id = JSON.parse(this.responseText);
-               callback(id[0].id);
+                callback(id[0].id);
             }
         }
         xhr.send(params);
+    }
+
+    updateGrid(id, col, row) {
+        var params = "&id=" + id + "&col=" + col + "&row=" + row;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'PHP/updateGrid.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onload = function () {
+            if (this.status == 200) {
+                console.log(this.responseText);
+            }
+        }
+        xhr.send(params);
+    }
+
+    retrieveGrid(){
+        // var params = "&id=" + id + "&col=" + col + "&row=" + row;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'PHP/retrieveGrid.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onload = function () {
+            if (this.status == 200) {
+                console.log(this.responseText);
+            }
+        }
+        xhr.send();
     }
 }
 

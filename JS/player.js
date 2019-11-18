@@ -12,6 +12,8 @@ export default class Player {
         this.offsetTop = canvas.height / 8;
         this.userAccount = userAccount;
         this.username = userAccount.username;
+        this.color = "black";
+        this.id = 0;
         this.keyDown = (e) => {
             switch (e.key) {
                 case "Right":

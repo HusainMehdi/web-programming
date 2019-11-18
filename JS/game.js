@@ -35,10 +35,15 @@ export default class Game {
                 draw(new Opponent(opponents[i], 5, color));
             }
             db.updatePlayerStatus(player.username, player.x, player.y, updatePlayerStatus);
+            db.retrieveGrid();
             drawName();
-            grid.collisionDetection(player);
+            grid.collisionDetection(player, player.id);
             requestAnimationFrame(interval)
         };
+
+        function retrieveGrid(){
+            // todo: (Callback) What do we do with the json return from retrieveGrid() ?
+        } 
 
         //Sends information about this player to DB and retrieves information about other players
         //executed as callback function in db.updatePlayerStatus
@@ -55,6 +60,7 @@ export default class Game {
         function setColor(id) {
             var color = colorArray[id % colorArray.length];
             player.color = color;
+            player.id = id;
         }
 
         //renders a drawable object to the canvas
