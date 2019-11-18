@@ -1,9 +1,6 @@
 'use strict';
-import db from './dbcommands.js';
 export default class Player {
     constructor(posX, posY, radius, speed, userAccount) {
-        var colorArray = ["red", "yellow", "blue", "green"];
-        var color = "white";
         this.x = posX;
         this.y = posY;
         this.speed = speed;
@@ -13,7 +10,6 @@ export default class Player {
         this.downPressed = false;
         this.radius = radius;
         this.offsetTop = canvas.height / 8;
-        this.color = color; //todo
         this.userAccount = userAccount;
         this.username = userAccount.username;
         this.keyDown = (e) => {
@@ -58,25 +54,10 @@ export default class Player {
 
         }
 
-
-        //called when player added to game
-        function getPlayerId() {
-            db.getPlayerId(userAccount.username, setColor);
-        }
-
-        //called when player id found
-        function setColor(id) {
-            color = colorArray[id % colorArray.length];
-        }
-
         document.addEventListener("keydown", this.keyDown, false);
         document.addEventListener("keyup", this.keyUp, false);
 
-        //adds player to active players table
-        db.addPlayerToGame(this.username, this.x, this.y, getPlayerId);
     }
-
-
     draw(canvas) {
         var ctx = canvas.getContext("2d");
         ctx.beginPath();

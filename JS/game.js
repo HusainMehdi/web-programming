@@ -14,36 +14,50 @@ export default class Game {
         var ctx = canvas.getContext("2d");
         var player = new Player(canvas.width / 2, canvas.height / 2, 5, 7, userAccount);
         var grid = new Grid(16, 16);
+        var colorArray = ["red", "orange", "blue", "green"];
 
         // remove player from game if they close the window or refresh
         window.onbeforeunload = function () {
             db.removePlayerFromGame(player.username);
         }
 
-        //Sends information about this player to DB and retrieves information about other players
-        //executed as callback function in db.updatePlayerStatus
-        function updatePlayerStatus(playerData){
-            opponents = playerData;
-        }
+        //adds player to active players table
+        db.addPlayerToGame(player.username, player.x, player.y, getPlayerId);
 
+        //The main program loop. Executes all rendering
         var interval = () => {
             //clear whole canvas before each draw
             ctx.clearRect(0, 0, canvas.width, canvas.height)
             draw(grid);
             draw(player);
-            // console.log("data in game: "+playerData[0].x)
             for (var i = 0; i < opponents.length; i++) {
-                draw(new Opponent(opponents[i], 5));
+                var color = colorArray[opponents[i].id % colorArray.length]
+                draw(new Opponent(opponents[i], 5, color));
             }
             db.updatePlayerStatus(player.username, player.x, player.y, updatePlayerStatus);
-            // for(opponent : opponents)
-            //////draw(opponent)
-            drawScore();
+            drawName();
             grid.collisionDetection(player);
-            // gameOverCheck();
             requestAnimationFrame(interval)
         };
 
+        //Sends information about this player to DB and retrieves information about other players
+        //executed as callback function in db.updatePlayerStatus
+        function updatePlayerStatus(playerData) {
+            opponents = playerData;
+        }
+
+        //called when player added to game
+        function getPlayerId() {
+            db.getPlayerId(player.username, setColor);
+        }
+
+        //called when player id found
+        function setColor(id) {
+            var color = colorArray[id % colorArray.length];
+            player.color = color;
+        }
+
+        //renders a drawable object to the canvas
         function draw(obj) {
             obj.draw(canvas);
         }
@@ -59,14 +73,11 @@ export default class Game {
             }
         }
 
-        function drawScore() {
+        function drawName() {
             ctx.font = "16px Arial";
             ctx.fillStyle = "#0095DD";
             ctx.fillText("" + player.username, 8, 20);
         }
-
         interval();
     }
-
-
 }

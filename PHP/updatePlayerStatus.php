@@ -4,7 +4,7 @@ $name = mysqli_real_escape_string($conn, $_POST['username']);
 $x = mysqli_real_escape_string($conn, $_POST['x']);
 $y = mysqli_real_escape_string($conn, $_POST['y']);
 $update = "UPDATE `playersingame` SET `x` =$x, `y`=$y WHERE `name` = '$name';";
-$select = "SELECT * FROM `playersingame`;";
+$select = "SELECT * FROM `playersingame` WHERE `name` != '$name';";
 
 if (mysqli_query($conn, $update)) {
     // echo $name." at x".$x."y".$y;

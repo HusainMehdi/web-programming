@@ -74,6 +74,7 @@ class DBCommands {
         xhr.send(params);
     }
 
+    // Sends data of player to DB and retrieves data of opponents
     updatePlayerStatus(username, x, y, callback) {
         var params = "&username=" + username + "&x=" + x + "&y=" + y;
         var xhr = new XMLHttpRequest();
@@ -82,9 +83,7 @@ class DBCommands {
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.onload = function () {
             if (this.status == 200) {
-                // console.log(this.responseText);
                 var playerData = JSON.parse(this.responseText);
-                console.log(playerData);
                 callback(playerData);
             }
         }
@@ -99,8 +98,8 @@ class DBCommands {
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.onload = function () {
             if (this.status == 200) {
-                var id = this.responseText;
-               callback(id);
+                var id = JSON.parse(this.responseText);
+               callback(id[0].id);
             }
         }
         xhr.send(params);
