@@ -4,7 +4,6 @@
     <title>Login to the Game></title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css" />
-    <link rel="shortcut icon" href="#" />
   </head>
   <body>
 
@@ -26,15 +25,16 @@
         if(isset($_POST['user_name'])) {
             //Using the credentials the db is called to check for the results
             $user_name = $_REQUEST['user_name'];
-            $user_name = mysqli_real_escape_string($con,$user_name);
-            $password = $_REQUEST['password'];
-            $password = mysqli_real_escape_string($con,$password);
             echo $user_name;
+            $user_name = mysqli_real_escape_string($con,$user_name);
+            echo $user_name;
+            $password = $_REQUEST['password'];
             echo $password;
-
+            $password = mysqli_real_escape_string($con,$password);
+            echo $password;
             $query = "SELECT * FROM 'users' WHERE user_name='$user_name' and password='$password'";
-            echo "Failed to connect to Database: " . mysqli_connect_error();
             $result = mysqli_query($con,$query) or die(mysql_error());
+            echo "Failed to connect to Database: " . mysqli_connect_error();
             echo $result;
             $rows = mysqli_num_rows($result);
             echo $rows;
