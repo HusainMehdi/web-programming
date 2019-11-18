@@ -1,45 +1,47 @@
 <!DOCTYPE html>
-  <html>
-		  <head>
-				  <title>Square Game</title>
-				  <link rel="stylesheet" href="style.css" type="text/css" media="screen">
-		  </head>
-		  
-		  <body>
-			
-			  <h1>Grid Conquest</h1>
-			  <div id="clockdiv">
-  <div>
-    <span class="minutes"></span>
-    <div class="smalltext">Minutes</div>
-  </div>
-  <div>
-    <span class="seconds"></span>
-    <div class="smalltext">Seconds</div>
-  </div>
-</div>
-        
-<div id='countdown'>
-</div>
+<html lang="en">
 
-		  		<select id="colourSelector" onchange="selectColour()">
-				  <option value="Blue">blue</option>
-				  <option value="Green">green</option>
-				  <option value="Yellow">yellow</option>
-				  <option value="Red">Red</option>
-				  <option value="Orange">Orange</option>
-				  <option value="Purple">Purple</option>
-				  <option value="Brown">Brown</option>
-				  <option value="NavajoWhite">Tan</option>
-				</select>
-				<select id="stateSelector" onchange="selectState()">
-					<option value="Rock">rock</option>
-					<option value="Paper">paper</option>
-					<option value="Scissors">scissors</option>
-				  </select>
-	  </body>
-	          <button onclick="openWindow();">Need help playing? Click here!</button>
-		  <script src="game.js"></script>
-		  <script src="gameCountdown.js"></script>
-	          <script src="Help.js"></script>
-  </html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen">
+    <title>Game</title>
+
+</head>
+
+<body>
+    <canvas id="canvas" width="560" height="560"></canvas>
+
+    <div id='loginMenu'>
+        <div id="login">
+            <p>Login</p>
+            <div id="username">
+                <label for="loginUserNameInput">Username</label>
+                <input type="text" id="loginUserNameInput">
+            </div>
+            <div id="password">
+                <label for="loginPasswordInput">Password</label>
+                <input type="text" id="loginPasswordInput">
+            </div>
+            <div></div><button id="loginButton" type="button">Login</button>
+        </div>
+        <label id="loginStatusLabel"></label>
+        <div id="create">
+            <p>Create Account</p>
+            <div id="username">
+                <label for="createUserNameInput">Username</label>
+                <input id="createUserNameInput" type="text">
+            </div>
+            <div id="password">
+                <label for="createPasswordInput">Password</label>
+                <input id="createPasswordInput" type="text">
+
+            </div>
+            <button id="createButton" type="button">Create</button>
+        </div>
+        <label id="createStatusLabel"></label>
+    </div>
+</body>
+<script type="module" src="JS/login.js"></script>
+</html>
