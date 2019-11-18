@@ -1,6 +1,6 @@
 'use strict';
 
-import Sprite from './sprite.js';
+import Player from './player.js';
 import Grid from './grid.js';
 import db from './dbcommands.js';
 import Opponent from './opponent.js';
@@ -12,37 +12,34 @@ export default class Game {
         //stores the 2d rendering context (actual tool for painting on the canvas)
         var opponents = [];
         var ctx = canvas.getContext("2d");
-        var sprite = new Sprite(canvas.width / 2, canvas.height / 2, 5, 7);
+        var player = new Player(canvas.width / 2, canvas.height / 2, 5, 7, userAccount);
         var grid = new Grid(16, 16);
-        var username = userAccount.username;
-        //adds player to active players table
-        db.addPlayerToGame(username, sprite.x, sprite.y);
 
         // remove player from game if they close the window or refresh
         window.onbeforeunload = function () {
-            db.removePlayerFromGame(username);
+            db.removePlayerFromGame(player.username);
         }
 
         //Sends information about this player to DB and retrieves information about other players
         //executed as callback function in db.updatePlayerStatus
-        function updatePlayerStatus(playerData) {
-           opponents = playerData;
+        function updatePlayerStatus(playerData){
+            opponents = playerData;
         }
 
         var interval = () => {
             //clear whole canvas before each draw
             ctx.clearRect(0, 0, canvas.width, canvas.height)
             draw(grid);
-            draw(sprite);
-            db.updatePlayerStatus(username, sprite.x, sprite.y, updatePlayerStatus);
-             // console.log("data in game: "+playerData[0].x)
-             for(var i=0; i<opponents.length; i++){
+            draw(player);
+            // console.log("data in game: "+playerData[0].x)
+            for (var i = 0; i < opponents.length; i++) {
                 draw(new Opponent(opponents[i], 5));
             }
+            db.updatePlayerStatus(player.username, player.x, player.y, updatePlayerStatus);
             // for(opponent : opponents)
             //////draw(opponent)
             drawScore();
-            grid.collisionDetection(sprite);
+            grid.collisionDetection(player);
             // gameOverCheck();
             requestAnimationFrame(interval)
         };
@@ -53,7 +50,7 @@ export default class Game {
 
         function gameOverCheck() {
             if (ball.y + ball.dy > canvas.height - ball.radius) {
-                if (ball.x > sprite.x && ball.x < sprite.x + sprite.width) {
+                if (ball.x > player.x && ball.x < player.x + player.width) {
                     ball.dy *= -1;
                 } else {
                     //alert("Game Over")
@@ -65,7 +62,7 @@ export default class Game {
         function drawScore() {
             ctx.font = "16px Arial";
             ctx.fillStyle = "#0095DD";
-            ctx.fillText("" + username, 8, 20);
+            ctx.fillText("" + player.username, 8, 20);
         }
 
         interval();

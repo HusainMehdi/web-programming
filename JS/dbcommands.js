@@ -45,7 +45,7 @@ class DBCommands {
             document.querySelector('#createStatusLabel').innerHTML = "Please enter a username and password";
     }
 
-    addPlayerToGame(username, x, y) {
+    addPlayerToGame(username, x, y, callback) {
         var params = "&username=" + username + "&x=" + x + "&y=" + y;
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'PHP/addPlayerToGame.php', true);
@@ -54,6 +54,7 @@ class DBCommands {
         xhr.onload = function () {
             if (this.status == 200) {
                 console.log(this.responseText);
+                callback();
             }
         }
         xhr.send(params);
@@ -83,8 +84,23 @@ class DBCommands {
             if (this.status == 200) {
                 // console.log(this.responseText);
                 var playerData = JSON.parse(this.responseText);
-                // console.log(playerData);
+                console.log(playerData);
                 callback(playerData);
+            }
+        }
+        xhr.send(params);
+    }
+
+    getPlayerId(username, callback) {
+        console.log(username);
+        var params = "&username=" + username;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'PHP/getPlayerId.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onload = function () {
+            if (this.status == 200) {
+                var id = this.responseText;
+               callback(id);
             }
         }
         xhr.send(params);

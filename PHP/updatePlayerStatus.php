@@ -1,13 +1,13 @@
 <?php
 require('db.php');
-$username = mysqli_real_escape_string($conn, $_POST['username']);
+$name = mysqli_real_escape_string($conn, $_POST['username']);
 $x = mysqli_real_escape_string($conn, $_POST['x']);
 $y = mysqli_real_escape_string($conn, $_POST['y']);
-$update = "UPDATE `activeplayers` SET `x` =$x, `y`=$y WHERE `username` = '$username';";
-$select = "SELECT * FROM `activeplayers`;";;
+$update = "UPDATE `playersingame` SET `x` =$x, `y`=$y WHERE `name` = '$name';";
+$select = "SELECT * FROM `playersingame`;";
 
 if (mysqli_query($conn, $update)) {
-    // echo $username." at x".$x."y".$y;
+    // echo $name." at x".$x."y".$y;
 }
 if (mysqli_query($conn, $select)) {
     $result = $conn->query($select);

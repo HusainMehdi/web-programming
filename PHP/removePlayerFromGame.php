@@ -1,10 +1,10 @@
 <?php
 require('db.php');
-$username = mysqli_real_escape_string($conn, $_POST['username']);
-$delete = "DELETE FROM `activeplayers` WHERE `username` = '$username';";
+$name = mysqli_real_escape_string($conn, $_POST['username']);
+$delete = "DELETE FROM `playersingame` WHERE `name` = '$name';";
 
 if(mysqli_query($conn, $delete)){
-    echo $username." left the game";
+    echo $name." left the game";
 }
 else {
     echo 'ERROR: ' . mysqli_error($conn);

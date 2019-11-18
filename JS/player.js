@@ -1,6 +1,9 @@
 'use strict';
-export default class Sprite {
-    constructor(posX, posY, radius, speed) {
+import db from './dbcommands.js';
+export default class Player {
+    constructor(posX, posY, radius, speed, userAccount) {
+        var colorArray = ["red", "yellow", "blue", "green"];
+        var color = "white";
         this.x = posX;
         this.y = posY;
         this.speed = speed;
@@ -9,7 +12,10 @@ export default class Sprite {
         this.upPressed = false;
         this.downPressed = false;
         this.radius = radius;
-        this.offsetTop = canvas.height/8;
+        this.offsetTop = canvas.height / 8;
+        this.color = color; //todo
+        this.userAccount = userAccount;
+        this.username = userAccount.username;
         this.keyDown = (e) => {
             switch (e.key) {
                 case "Right":
@@ -49,17 +55,34 @@ export default class Sprite {
                     this.downPressed = false;
                     break;
             }
+
         }
+
+
+        //called when player added to game
+        function getPlayerId() {
+            db.getPlayerId(userAccount.username, setColor);
+        }
+
+        //called when player id found
+        function setColor(id) {
+            color = colorArray[id % colorArray.length];
+        }
+
         document.addEventListener("keydown", this.keyDown, false);
         document.addEventListener("keyup", this.keyUp, false);
+
+        //adds player to active players table
+        db.addPlayerToGame(this.username, this.x, this.y, getPlayerId);
     }
+
 
     draw(canvas) {
         var ctx = canvas.getContext("2d");
         ctx.beginPath();
         //circle
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = "blue";
+        ctx.fillStyle = this.color;
         ctx.fill();
         ctx.closePath();
         if (this.rightPressed) {
@@ -75,12 +98,12 @@ export default class Sprite {
         if (this.upPressed) {
             this.y -= this.speed;
             if (this.y - this.radius < this.offsetTop)
-                this.y = this.radius+this.offsetTop;
+                this.y = this.radius + this.offsetTop;
         }
         if (this.downPressed) {
             this.y += this.speed;
             if (this.y + this.radius > canvas.height)
-                this.y = canvas.height-this.radius;
+                this.y = canvas.height - this.radius;
         }
     }
 }
