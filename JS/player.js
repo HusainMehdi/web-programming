@@ -1,19 +1,26 @@
 'use strict';
+/**Class used to render you the player onto the canvas. Defines a movement system and tracks location coordinates to be sent to the db for other players to see.
+ * retrieves id from the db used to define your color
+ */
 export default class Player {
-    constructor(posX, posY, radius, speed, userAccount) {
+    constructor(posX, posY, userAccount) {
         this.x = posX;
         this.y = posY;
-        this.speed = speed;
+        this.speed = 7;
         this.leftPressed = false;
         this.rightPressed = false;
         this.upPressed = false;
         this.downPressed = false;
-        this.radius = radius;
+        this.radius = 5;
         this.offsetTop = canvas.height / 8;
         this.userAccount = userAccount;
         this.username = userAccount.username;
         this.color = "black";
         this.id = 0;
+        /** Moves the player in the direction corresponding to the arrow key pressed.
+         * @param  {} e keypress event which triggers the function
+         * @returns this
+         */
         this.keyDown = (e) => {
             switch (e.key) {
                 case "Right":
@@ -34,6 +41,10 @@ export default class Player {
                     break;
             }
         }
+        /** Stops the player when arrow keys are released
+         * @param  {} e keypress event which triggers the function
+         * @returns this
+         */
         this.keyUp = (e) => {
             switch (e.key) {
                 case "Right":
@@ -60,13 +71,18 @@ export default class Player {
         document.addEventListener("keyup", this.keyUp, false);
 
     }
+    /**Called by the main program loop to render the player onto the screen as a colored circle
+     * @param  {} canvas the canvas on which to draw the player
+     */
     draw(canvas) {
         var ctx = canvas.getContext("2d");
         ctx.beginPath();
         //circle
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
         ctx.fillStyle = this.color;
+        ctx.strokeStyle = "black";
         ctx.fill();
+        ctx.stroke();
         ctx.closePath();
         if (this.rightPressed) {
             this.x += this.speed;

@@ -7,3 +7,6 @@ $insert = "INSERT INTO `playersingame` (`name`, `x`, `y`) VALUES ('$name',$x, $y
 if(mysqli_query($conn, $insert)){
     echo $name.' joined the game';
 }
+else {
+    echo 'ERROR: ' . mysqli_error($conn);
+}
