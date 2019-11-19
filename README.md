@@ -4,6 +4,7 @@ Game for Web Programming
 Current Live version: http://www2.macs.hw.ac.uk/~cw78/web-programming/
 
 WARNING! Lags really hard if you're not on a macs pc
+
 Also not secured yet so DO NOT enter passwords you actually use IRL
 
 Began a new game from scratch. Not sure how to add to the one we had so hopefully this might be something we can make more progress with.
