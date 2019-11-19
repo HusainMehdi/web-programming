@@ -1,6 +1,6 @@
 1. Install XAMMP
 	- Virtual Apache server and MySQL
-https://www.youtube.com/watch?v=6tCWiexc05U
+https://www.youtube.com/watch?v=82hnvUYY6QA
 
 2. Move this repo into (windows) C:\xampp\htdocs
 		       (mac) /.../wherever mac puts htdocs
