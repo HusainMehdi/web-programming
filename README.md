@@ -1,7 +1,7 @@
 # web-programming
 Game for Web Programming
 
-Began a new game from scratch. I wasn't sure how to add to the one we had so hopefully this might be something we can make more progress with.
+Began a new game from scratch. Not sure how to add to the one we had so hopefully this might be something we can make more progress with.
 
 Load the game up with the db installed or check my commit history to see what's been implemented. See HOW TO USE DB.txt for instructions on using the db.
 
