@@ -36,3 +36,5 @@ I will hopefully have the grid takeover system implemented by tomorrow or the da
 Let me know if you have any questions.
 Powerup system (Create a power up class which can be used to randomly 
 spawn an object on the canvas which gives the player a speed boost or a radius increase etc. when they collide with it.)
+
+Most of what needs doing will involve some interaction with the server. Please see https://www.youtube.com/watch?v=82hnvUYY6QA on how to set up your own virtual host environment and interact with a database. Basic worflow: implement game mechanic > create http request function > write db queries in php > (if retrieving data) write callback function to bring the data back into the game.
