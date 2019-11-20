@@ -1,12 +1,11 @@
 'use strict';
-
-export default class Player {
+import DrawableObject from './drawableobject.js';
+export default class Player extends DrawableObject {
     /**Class used to render you the player onto the canvas. Defines a movement system and tracks location coordinates to be sent to the db for other players to see.
      * retrieves id from the db used to define your color
      */
     constructor(posX, posY, userAccount) {
-        this.x = posX;
-        this.y = posY;
+        super(posX, posY);
         this.speed = 4;
         this.leftPressed = false;
         this.rightPressed = false;
@@ -18,6 +17,9 @@ export default class Player {
         this.username = userAccount.username;
         this.color = "black";
         this.id = 0;
+        this.wins = userAccount.wins;
+        this.losses = userAccount.losses;
+
         /** Moves the player in the direction corresponding to the arrow key pressed.
          * @param  {} e keypress event which triggers the function
          * @returns this
@@ -76,15 +78,16 @@ export default class Player {
      * @param  {} canvas the canvas on which to draw the player
      */
     draw(canvas) {
-        var ctx = canvas.getContext("2d");
-        ctx.beginPath();
+        super.draw(canvas);
+        this.drawName(this.ctx, canvas);
+        this.drawWinLoss(this.ctx, canvas);
         //circle
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.strokeStyle = "black";
-        ctx.fill();
-        ctx.stroke();
-        ctx.closePath();
+        this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        this.ctx.fillStyle = this.color;
+        this.ctx.strokeStyle = "black";
+        this.ctx.fill();
+        this.ctx.stroke();
+        this.ctx.closePath();
         if (this.rightPressed) {
             this.x += this.speed;
             if (this.x + this.radius > canvas.width)
@@ -106,4 +109,21 @@ export default class Player {
                 this.y = canvas.height - this.radius;
         }
     }
+
+        /**renders your account name in the top left corner of the canvas
+         */
+        drawName(ctx, canvas) {
+            ctx.font = "16px Arial";
+            ctx.fillStyle = "#0095DD";
+            ctx.fillText("" + this.username, 8, 20);
+        }
+
+        /**renders your account name in the top left corner of the canvas
+         */
+        drawWinLoss(ctx, canvas) {
+            ctx.font = "16px Arial";
+            ctx.fillStyle = "#0095DD";
+            ctx.fillText("Wins: " + this.wins, canvas.width/16*5, 20);
+            ctx.fillText("Losses: " + this.losses,canvas.width/16*9, 20);
+        }
 }

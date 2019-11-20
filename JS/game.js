@@ -48,11 +48,11 @@ export default class Game {
             draw(countdown);
             for (var i = 0; i < opponents.length; i++) {
                 var color = colorArray[opponents[i].id % colorArray.length]
-                draw(new Opponent(opponents[i], player.radius, color));
+                if (opponents[i].id != player.id)
+                    draw(new Opponent(opponents[i], player.radius, color));
             }
             db.updatePlayerStatus(player.username, player.x, player.y, updatePlayerStatus);
             _retrieveGrid(this.clock, 5);
-            drawName();
             grid.collisionDetection(player, player.id);
             //recalls interval() continuously at approximately 60hz.
             requestAnimationFrame(interval)
@@ -79,8 +79,25 @@ export default class Game {
 
             function getTimeStamp(time) {
                 countdown.setTime(time);
+                console.log(countdown.time);
+                if (countdown.time < 2)
+                    newRound();
             }
         }
+
+        /**Starts a new round
+         */
+        function newRound() {
+            //retrieve the name of the winner, increment their wins in the db
+            db.setWinner(player.username, updateScore);
+
+            function updateScore(winloss) {
+                console.log(winloss);
+                player.wins = winloss.wins;
+                player.losses = winloss.losses;
+            }
+        }
+
         /**Retrieves a JSON representation of the grid from the database
          * @param  {} clock reference to global game clock
          * @param  {} minInterval The minimum time interval between each server request
@@ -90,7 +107,6 @@ export default class Game {
                 db.retrieveGrid(allocateCells);
             }
         }
-
 
         /**Maps the cell information (i.e. ownership) stored in db onto the cells in this game
          * @param  {} dbgrid Grid status returned from db containing information on the state of each cell. Most importantly ownership.
@@ -127,15 +143,6 @@ export default class Game {
             player.color = color;
             player.id = id;
         }
-
-        /**renders your account name in the top left corner of the canvas
-         */
-        function drawName() {
-            ctx.font = "16px Arial";
-            ctx.fillStyle = "#0095DD";
-            ctx.fillText("" + player.username, 8, 20);
-        }
-
 
     }
 }

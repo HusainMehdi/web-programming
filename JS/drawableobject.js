@@ -11,6 +11,7 @@ export default class DrawableObject {
      * @param  {} canvas the canvas on which to draw the object
      */
     draw(canvas) {
-
+        this.ctx = canvas.getContext("2d");
+        this.ctx.beginPath();
     }
 }

@@ -15,7 +15,7 @@ if (isset($_POST['username'])) {
     //if no error, then username exists and return message "name already taken, try again"
 
 
-    $select = "SELECT `username` FROM `accounts` WHERE `username` = '$username' AND `password` = '$password';";
+    $select = "SELECT `username`, `wins`, `losses`  FROM `accounts` WHERE `username` = '$username' AND `password` = '$password';";
 
 
     //send back the updated cell

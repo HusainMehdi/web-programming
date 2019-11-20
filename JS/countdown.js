@@ -3,15 +3,13 @@ export default class Countdown extends DrawableObject {
     /**A countdown timer displaying the time left until the round completes */
     constructor(x, y) {
         super(x, y);
-        this.time = "";
+        this.time = 60;
     }
     draw(canvas) {
         super.draw(canvas);
-        var ctx = canvas.getContext("2d");
-        // console.log(this.time);
-        ctx.font = "16px Arial";
-        ctx.fillStyle = "#0095DD";
-        ctx.fillText("" + this.time, canvas.width - canvas.width / 8, 20);
+        this.ctx.font = "16px Arial";
+        this.ctx.fillStyle = "#0095DD";
+        this.ctx.fillText("Time" + (this.time-1), canvas.width - canvas.width / 8, 20);
     }
 
     setTime(time) {

@@ -161,6 +161,9 @@ class DBCommands {
         }
         xhr.send();
     }
+    /**Retrieves the current server time
+     * @param  {} callback - function to execute upon retrieval
+     */
     getTimeStamp(callback) {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'PHP/getTimeStamp.php', true);
@@ -174,6 +177,22 @@ class DBCommands {
             }
         }
         xhr.send();
+    }
+    setWinner(username, callback) {
+        console.log("someone won");
+        var params = "&username=" + username;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'PHP/setWinner.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onload = function () {
+            if (this.status == 200) {
+                // console.log(this.responseText);
+                // console.log(username);
+                var response = JSON.parse(this.responseText);
+                callback(response);
+            }
+        }
+        xhr.send(params);
     }
 }
 

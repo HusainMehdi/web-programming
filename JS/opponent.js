@@ -1,6 +1,8 @@
-export default class Opponent {
+import DrawableObject from './drawableobject.js';
+export default class Opponent extends DrawableObject {
     /**Class used to render opponents onto canvas for player to see */
     constructor(playerData, radius, color) {
+        super();
         this.x = playerData.x;
         this.y = playerData.y;
         this.username = playerData.name;
@@ -13,14 +15,14 @@ export default class Opponent {
      */
     draw(canvas) {
         // console.log(this.username + " : " + this.x + " : " + this.y)
-        var ctx = canvas.getContext("2d");
-        ctx.beginPath();
+        super.draw(canvas);
+        // this.ctx.beginPath();
         //circle
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.strokeStyle = "black";
-        ctx.fill();
-        ctx.stroke();
-        ctx.closePath();
+        this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        this.ctx.fillStyle = this.color;
+        this.ctx.strokeStyle = "black";
+        this.ctx.fill();
+        this.ctx.stroke();
+        this.ctx.closePath();
     }
 }
