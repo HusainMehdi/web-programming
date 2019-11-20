@@ -1,50 +1,28 @@
 <!DOCTYPE html>
   <html>
-		  <head>
-				  <title>Square Game</title>
-				  <link rel="stylesheet" href="style.css" type="text/css" media="screen">
-		  </head>
-		  
-		  <body>
-			
-			  <h1>Grid Conquest</h1>
-			  <div class="menu">
-				  <li><a href="login.php">Login</a></li>
-				  <li><a href="registration.php">Register</a></li>
-				  <li>Rules</li>
-				  <li>Developers</li>
-				  <li><a href="logout.php">Log Out</a></li>
-			  </div>
-			  <div id="clockdiv">
-  <div>
-    <span class="minutes"></span>
-    <div class="smalltext">Minutes</div>
-  </div>
-  <div>
-    <span class="seconds"></span>
-    <div class="smalltext">Seconds</div>
-  </div>
-</div>
-        
-<div id="countdown">
-</div>
-		  		<select id="colourSelector" onchange="selectColour()">
-				  <option value="Blue">blue</option>
-				  <option value="Green">green</option>
-				  <option value="Yellow">yellow</option>
-				  <option value="Red">Red</option>
-				  <option value="Orange">Orange</option>
-				  <option value="Purple">Purple</option>
-				  <option value="Brown">Brown</option>
-				  <option value="NavajoWhite">Tan</option>
-				</select>
-				<select id="stateSelector" onchange="selectState()">
-					<option value="Rock">rock</option>
-					<option value="Paper">paper</option>
-					<option value="Scissors">scissors</option>
-				  </select>
-		  </body>
-		  <script src="game.js"></script>
-		  <script src="gameCountdown.js"></script>
+  <head>
+    <title>Login to the Game></title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
+		  <body>
+        <?php
+        session_start();
+
+			  echo '<h1>Our Game</h1>';
+			  echo '<div class="menu">';
+        echo $_SESSION["user_name"];
+        if(isset($_SESSION["user_name"])){
+          echo '<li><a href="logout.php">Log Out</a></li>';
+        }else{
+          echo '<li><a href="login.php">Login</a></li>';
+          echo '<li><a href="registration.php">Register</a></li>';
+        }
+				echo '<li>Rules</li>';
+				echo '<li>Developers</li>';
+        echo '</div>';
+
+        ?>
+    </body>
   </html>

@@ -14,7 +14,7 @@
 	function is_blank($x) {
     	return !isset($x) || trim($x) === '';
 	  }
-	  
+
 	//Check if the email is in a valid format
 	function isEmailValid($value) {
 		$email_regex = '/\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\Z/i';

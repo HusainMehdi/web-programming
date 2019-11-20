@@ -15,89 +15,88 @@
 		$email = '';
 		$check = '';
 
-			if (is_logged_in()){
-				echo "<div class='failed'>
-				<h3> You are already logged in!</h3>
-				<br/>
-				<a href='index.php'>Go back</a> Or <a href='logout.php'>Log out</a>
-				</div>";
-			}
+			// if (is_logged_in()){
+			// 	echo "<div class='failed'>
+			// 	<h3> You are already logged in!</h3>
+			// 	<br/>
+			// 	<a href='index.php'>Go back</a> Or <a href='logout.php'>Log out</a>
+			// 	</div>";
+			// }
 
 
-		//Checks if the user name has been used before
-		function uniqueUserName($user_name) {
-			$check = mysqli_real_escape_string($con,$user_name);
-			echo $check;
-			$check = "SELECT * FROM 'users' WHERE username='$user_name'";
-			echo $check;
-			$result = mysqli_query($con, $check);
-			echo "Failed to connect to Database: " . mysqli_connect_error();
-			$count = mysqli_num_rows($result);
-			echo $count;
-    		mysqli_free_result($result);
-			return $admin_count === 0;
-		}
-		//Checks if the email has been used before
-		function uniqueEmail($email) {
-			$check = mysqli_real_escape_string($con,$email);
-			echo $check;
-			$check = "SELECT * FROM 'users' WHERE email='$email'";
-			echo $check;
-			$result = mysqli_query($con, $check);
-			echo "Failed to connect to Database: " . mysqli_connect_error();
-			echo $result;
-			$count = mysqli_num_rows($result);
-			echo $count;
-    		mysqli_free_result($result);
-			return $admin_count === 0;
-		}
+		// //Checks if the user name has been used before
+		// function uniqueUserName($user_name) {
+		// 	$check = mysqli_real_escape_string($con,$user_name);
+		// 	echo $check;
+		// 	$check = "SELECT * FROM 'users' WHERE username='$user_name'";
+		// 	echo $check;
+		// 	$result = mysqli_query($con, $check);
+		// 	echo "Failed to connect to Database: " . mysqli_connect_error();
+		// 	$count = mysqli_num_rows($result);
+		// 	echo $count;
+    // 		mysqli_free_result($result);
+		// 	return $admin_count === 0;
+		// }
+		// //Checks if the email has been used before
+		// function uniqueEmail($email) {
+		// 	$check = mysqli_real_escape_string($con,$email);
+		// 	echo $check;
+		// 	$check = "SELECT * FROM 'users' WHERE email='$email'";
+		// 	echo $check;
+		// 	$result = mysqli_query($con, $check);
+		// 	echo "Failed to connect to Database: " . mysqli_connect_error();
+		// 	echo $result;
+		// 	$count = mysqli_num_rows($result);
+		// 	echo $count;
+    // 		mysqli_free_result($result);
+		// 	return $admin_count === 0;
+		// }
 
         //Checks if user authentication has been done
         if(isset($_REQUEST['user_name'])) {
 
 			//Debuging of passed details
-			echo $_REQUEST['user_name'];
-			echo $_REQUEST['password'];
-			echo $_REQUEST['password2'];
-			echo $_REQUEST['email'];
+			// echo $_REQUEST['user_name'];
+			// echo $_REQUEST['password'];
+			// echo $_REQUEST['password2'];
+			// echo $_REQUEST['email'];
 
 
 			$user_name = $_REQUEST['user_name'];
 			echo $user_name;
 			$user_name = mysqli_real_escape_string($con,$user_name);
 			echo $user_name;
-						if(uniqueUserName($user_name)){
+						// if(uniqueUserName($user_name)){
 							$email = $_REQUEST['email'];
 							echo $email;
 							$email = mysqli_real_escape_string($con,$email);
 							echo $email;
-							if(uniqueEmail($email) && isEmailValid($email)){
+							// if(uniqueEmail($email) && isEmailValid($email)){
 								$password = $_REQUEST['password'];
 								echo $password;
 								$password = mysqli_real_escape_string($con,$password);
 								echo $password;
 
-								$query = "INSERT into 'users' (user_name, password, email) VALUES ('$user_name, $password, $email')";
+								$query = "INSERT into `users` (user_name, password, email) VALUES ('$user_name', '".md5($password)."', '$email')";
 								echo $query;
-
-            					if(mysqli_query($con,$query)){
-                					$_SESSION['user_name'] = $user_name;
+								$success = mysqli_query($con,$query);
+								if ($success){
 									echo '<script type="text/javascript">';
-									echo ' alert("Registration successful! Welcome!")';
+									echo ' alert("Registration successful! Please log in!")';
 									echo '</script>';
-                					header("Location: index.php");;
-									}
-
-			}
-          } else{
-                //Error msg if username or password is incorrect
-                echo "<div class='failed'>
-                <h3> Failed to register. Username or email address already exists</h3>
-                <br/>
-                <a href='registration.php'>Try again</a>
-								<p>Or if you have an account,<a href='login.php'>Log in</a>
-                </div>";
-            }
+                	header("Location: login.php");;
+								}
+										// 	}
+										// }
+          // } else{
+          //       //Error msg if username or password is incorrect
+          //       echo "<div class='failed'>
+          //       <h3> Failed to register. Username or email address already exists</h3>
+          //       <br/>
+          //       <a href='registration.php'>Try again</a>
+					// 			<p>Or if you have an account,<a href='login.php'>Log in</a>
+          //       </div>";
+          //   }
         }else{
 
 

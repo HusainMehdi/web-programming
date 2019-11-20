@@ -10,17 +10,10 @@
     <?php
         session_start();
         require('init.php');
-        //This function checks if the user has already got logged in
-        if (is_logged_in()){
-          echo "<div class='failed'>
-          <h3> You are already logged in!</h3>
-          <br/>
-          <a href='index.php'>Go back</a> Or <a href='logout.php'>Log out</a>
-          </div>";
-        }
         //Creates the variable for username and password
         $user_name = '';
         $password = '';
+
         //Checks if user authentication has been done
         if(isset($_POST['user_name'])) {
             //Using the credentials the db is called to check for the results
@@ -32,26 +25,23 @@
             echo $password;
             $password = mysqli_real_escape_string($con,$password);
             echo $password;
-            $query = "SELECT * FROM 'users' WHERE user_name='$user_name' and password='$password'";
+            $query = "SELECT * FROM `users` WHERE user_name='$user_name' and password='".md5($password)."'";
             $result = mysqli_query($con,$query) or die(mysql_error());
-            echo "Failed to connect to Database: " . mysqli_connect_error();
-            echo $result;
-            $rows = mysqli_num_rows($result);
-            echo $rows;
+	          $rows = mysqli_num_rows($result);
             if($rows==1){
-	             $_SESSION['username'] = $username;
+	             $_SESSION['user_name'] = $user_name;
                //Popup message confirming that the login has been successful
-               echo '<script type="text/javascript">';
-               echo ' alert("You are logged in! Welcome!")';
-               echo '</script>';
-                header("Location: index.php");;
+               // echo '<script type="text/javascript">';
+               // echo ' alert("Logged in")';
+               // echo '</script>';
+                header("Location: index.php");
             } else{
                 //Error msg if username or password is incorrect
                 echo "<div class='failed'>
                 <h3> Failed to log in. Username or email doen't match</h3>
                 <br/>
                 <a href='login.php'>Try again</a>
-				        <p>Or if you don't have an account,<a href='registration.php'>Register</a>
+				        <p>Or if you don't have an account,<a href='registration.php'> Register</a>
                 </div>";
             }
         }else{
