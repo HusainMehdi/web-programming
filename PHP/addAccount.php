@@ -5,7 +5,7 @@ require('db.php');
 
 //Check for POST variable
 if (isset($_POST['username'])) {
-    // $hilighted = mysqli_real_escape_string($conn, $_POST['hilighted']);
+    //convert POST variables to sql
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
 

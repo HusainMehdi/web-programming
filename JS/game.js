@@ -4,11 +4,13 @@ import Player from './player.js';
 import Grid from './grid.js';
 import db from './dbcommands.js';
 import Opponent from './opponent.js';
-/**The core game class which imports the various components of the game and renders them onto the canvas
- * the function interval() defines the main program loop and executes real time rendering and updating
- * of player and grid components.
- */
+import Countdown from './countdown.js';
+
 export default class Game {
+    /**The core game class which imports the various components of the game and renders them onto the canvas
+     * the function interval() defines the main program loop and executes real time rendering and updating
+     * of player and grid components.
+     */
     constructor(userAccount) {
         var canvas = document.querySelector('#canvas');
         // ctx stores the 2d rendering context (actual tool for painting on the canvas)
@@ -23,25 +25,33 @@ export default class Game {
         db.addPlayerToGame(player.username, player.x, player.y, getPlayerId);
         //generate the grid
         var grid = new Grid(16, 16, colorArray);
+        //incremented with each tick of interval(). Used to attenuate the frequency at which certain processes execute
+        var countdown = new Countdown(8, 20);
+        this.clock = 0;
 
         // removes you from activeplayers (db) if you close the window or refresh
         window.onbeforeunload = function () {
             db.removePlayerFromGame(player.username);
         }
 
-        /** The main program loop. Executes all rendering, retrieves opponent and grid data in real time.
+        /** The main program loop. Executes all rendering, retrieves opponent and grid data from server in real time. functions with a dash behind them eg. _getTimeStamp
+         * are throttled, meaning they have a minimum wait time between each request they can make to the server. This serves to improve performance and prevent 
+         * overloading of browser resources.
          */
         var interval = () => {
+            this.clock++;
             //clear whole canvas before each draw
             ctx.clearRect(0, 0, canvas.width, canvas.height)
+            _getTimeStamp(this.clock, 60);
             draw(grid);
             draw(player);
+            draw(countdown);
             for (var i = 0; i < opponents.length; i++) {
                 var color = colorArray[opponents[i].id % colorArray.length]
                 draw(new Opponent(opponents[i], player.radius, color));
             }
             db.updatePlayerStatus(player.username, player.x, player.y, updatePlayerStatus);
-            db.retrieveGrid(allocateCells);
+            _retrieveGrid(this.clock, 5);
             drawName();
             grid.collisionDetection(player, player.id);
             //recalls interval() continuously at approximately 60hz.
@@ -50,6 +60,37 @@ export default class Game {
 
         //initiate the program loop
         interval();
+
+        /**renders a drawable object onto the canvas using it's stored information to determine it's location and visual attributes
+         * @param  {} obj - The object to draw
+         */
+        function draw(obj) {
+            obj.draw(canvas);
+        }
+
+        /**Retrieves the current time of the server and uses it to set the countdown timer
+         * @param  {} clock reference to global game clock
+         * @param  {} minInterval The minimum time interval between each server request. eg. a value of 60 will call the server once every 60 interval() cycles.
+         */
+        function _getTimeStamp(clock, minInterval) {
+            if (clock % minInterval == 0) {
+                db.getTimeStamp(getTimeStamp);
+            }
+
+            function getTimeStamp(time) {
+                countdown.setTime(time);
+            }
+        }
+        /**Retrieves a JSON representation of the grid from the database
+         * @param  {} clock reference to global game clock
+         * @param  {} minInterval The minimum time interval between each server request
+         */
+        function _retrieveGrid(clock, minInterval) {
+            if (clock % minInterval == 0) {
+                db.retrieveGrid(allocateCells);
+            }
+        }
+
 
         /**Maps the cell information (i.e. ownership) stored in db onto the cells in this game
          * @param  {} dbgrid Grid status returned from db containing information on the state of each cell. Most importantly ownership.
@@ -60,12 +101,6 @@ export default class Game {
                 grid.cells[dbgrid[i].col][dbgrid[i].row].owner = dbgrid[i].owner;
             }
 
-        }
-        /**renders a drawable object onto the canvas using it's stored information to determine it's location and visual attributes
-         * @param  {} obj - The object to draw
-         */
-        function draw(obj) {
-            obj.draw(canvas);
         }
 
         /**Sends information about this player to DB and retrieves information about other players.
@@ -100,5 +135,7 @@ export default class Game {
             ctx.fillStyle = "#0095DD";
             ctx.fillText("" + player.username, 8, 20);
         }
+
+
     }
 }

@@ -140,7 +140,7 @@ class DBCommands {
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.onload = function () {
             if (this.status == 200) {
-                console.log(this.responseText);
+                // console.log(this.responseText);
             }
         }
         xhr.send(params);
@@ -149,14 +149,27 @@ class DBCommands {
      * @param  {} callback - function to call when retrieval completes
      */
     retrieveGrid(callback) {
-        // var params = "&id=" + id + "&col=" + col + "&row=" + row;
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'PHP/retrieveGrid.php', true);
+        xhr.open('GET', 'PHP/retrieveGrid.php', true);
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.onload = function () {
             if (this.status == 200) {
                 // console.log(this.responseText);
                 var response = JSON.parse(this.responseText);
+                callback(response);
+            }
+        }
+        xhr.send();
+    }
+    getTimeStamp(callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'PHP/getTimeStamp.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onload = function () {
+            if (this.status == 200) {
+                // console.log("x" + this.responseText);
+                // var response = JSON.parse(this.responseText);
+                var response = this.responseText;
                 callback(response);
             }
         }

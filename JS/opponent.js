@@ -1,5 +1,5 @@
-/**Class used to render opponents onto canvas for player to see */
 export default class Opponent {
+    /**Class used to render opponents onto canvas for player to see */
     constructor(playerData, radius, color) {
         this.x = playerData.x;
         this.y = playerData.y;

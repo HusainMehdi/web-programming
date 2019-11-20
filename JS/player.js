@@ -1,12 +1,13 @@
 'use strict';
-/**Class used to render you the player onto the canvas. Defines a movement system and tracks location coordinates to be sent to the db for other players to see.
- * retrieves id from the db used to define your color
- */
+
 export default class Player {
+    /**Class used to render you the player onto the canvas. Defines a movement system and tracks location coordinates to be sent to the db for other players to see.
+     * retrieves id from the db used to define your color
+     */
     constructor(posX, posY, userAccount) {
         this.x = posX;
         this.y = posY;
-        this.speed = 7;
+        this.speed = 4;
         this.leftPressed = false;
         this.rightPressed = false;
         this.upPressed = false;

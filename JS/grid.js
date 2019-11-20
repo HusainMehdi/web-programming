@@ -1,8 +1,9 @@
 import db from './dbcommands.js';
-/**
- * Class used to render a grid object and store information pertaining to each cell
- */
+
 export default class Grid {
+    /**
+     * Class used to render a grid object and store information pertaining to each cell
+     */
     constructor(columns, rows, colorArray) {
         //data used to draw the grid
         this.rows = rows;
@@ -50,7 +51,7 @@ export default class Grid {
             }
         }
     }
-    
+
     /**checks for overlap between a player and a cell. Updates the database with the new owner of the cell.
      * @param player  colliding player object
      */
