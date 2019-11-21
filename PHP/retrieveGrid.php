@@ -1,12 +1,11 @@
 <?php
+//Create Connection
 require('db.php');
-
-$select = "SELECT * FROM `grid`;";
-
-if (mysqli_query($conn, $select)) {
-    $result = $conn->query($select);
-    $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    echo json_encode($data);
-} else {
-    echo 'ERROR: ' . mysqli_error($conn);
-}
+//create query
+$query = "SELECT * FROM `grid`;";
+//Get Result
+$result = mysqli_query($conn, $query);
+//Fetch Data
+$grid = mysqli_fetch_all($result, MYSQLI_ASSOC);
+//Takes the result returned from the database and formats it into JSON
+echo json_encode($grid);
