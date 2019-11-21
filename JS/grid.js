@@ -39,11 +39,13 @@ export default class Grid extends DrawableObject {
                 var cellOwner = this.cells[c][r].owner;
                 this.cells[c][r].x = cellX
                 this.cells[c][r].y = cellY
-               this.ctx.strokeStyle = "black";
-               this.ctx.strokeRect(cellX, cellY, this.cellWidth, this.cellHeight);
-               this.ctx.fillStyle = this.colorArray[cellOwner % this.colorArray.length];
-               this.ctx.fillRect(cellX, cellY, this.cellWidth - 2, this.cellHeight - 2);
-               this.ctx.closePath();
+                this.ctx.strokeStyle = "black";
+                this.ctx.strokeRect(cellX, cellY, this.cellWidth, this.cellHeight);
+                if (cellOwner != -1)
+                    this.ctx.fillStyle = this.colorArray[cellOwner % this.colorArray.length];
+                    else this.ctx.fillStyle = "white";
+                this.ctx.fillRect(cellX, cellY, this.cellWidth - 2, this.cellHeight - 2);
+                this.ctx.closePath();
             }
         }
     }

@@ -79,7 +79,7 @@ export default class Player extends DrawableObject {
      */
     draw(canvas) {
         super.draw(canvas);
-        this.drawName(this.ctx, canvas);
+        // this.drawName(this.ctx, canvas);
         this.drawWinLoss(this.ctx, canvas);
         //circle
         this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
@@ -123,7 +123,7 @@ export default class Player extends DrawableObject {
         drawWinLoss(ctx, canvas) {
             ctx.font = "16px Arial";
             ctx.fillStyle = "#0095DD";
-            ctx.fillText("Wins: " + this.wins, canvas.width/16*5, 20);
-            ctx.fillText("Losses: " + this.losses,canvas.width/16*9, 20);
+            ctx.fillText("Wins: " + this.wins, canvas.width/32*12, 20);
+            ctx.fillText("Losses: " + this.losses,canvas.width/32*19, 20);
         }
 }

@@ -8,6 +8,8 @@ export default class Opponent extends DrawableObject {
         this.username = playerData.name;
         this.color = color;
         this.radius = radius;
+        this.cellsControlled = playerData.cellscontrolled;
+        this.score = playerData.score;
     }
 
     /**Called by the main program loop to render the opponent onto the screen as a colored circle. (color set by db).

@@ -11,7 +11,7 @@ if (isset($_POST['username'])) {
 
     //queries for the db
     $select = "SELECT `username`, `password` FROM `accounts` WHERE `username`='$username';";
-    $insert = "INSERT INTO `accounts` (`username`,  `password`) VALUES ('$username', '$password');";
+    $insert = "INSERT INTO `accounts` (`username`,  `password`, `wins`, `losses`) VALUES ('$username', '$password', 0, 0);";
 
     //result obtained by the select query
     $result = $conn->query($select);

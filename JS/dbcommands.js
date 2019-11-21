@@ -105,8 +105,10 @@ class DBCommands {
         xhr.onload = function () {
             if (this.status == 200) {
                 // console.log(this.responseText);
-                var playerData = JSON.parse(this.responseText);
-                callback(playerData);
+                if (this.responseText != 0) {
+                    var playerData = JSON.parse(this.responseText);
+                    callback(playerData);
+                }
             }
         }
         xhr.send(params);
@@ -178,6 +180,7 @@ class DBCommands {
         }
         xhr.send();
     }
+
     setWinner(username, callback) {
         console.log("someone won");
         var params = "&username=" + username;

@@ -18,7 +18,7 @@ export default class Game {
         //list of opponents, updated and rendered to the canvas with each tick of interval()
         var opponents = [];
         //player colors
-        var colorArray = ["red", "orange", "blue", "green"];
+        var colorArray = ["red", "orange", "blue", "green", "pink", "purple", "cyan", "yellow"];
         //The sprite you are in control of
         var player = new Player(canvas.width / 2, canvas.height / 2, userAccount);
         //add yourself to activeplayers in db
@@ -46,8 +46,10 @@ export default class Game {
             draw(grid);
             draw(player);
             draw(countdown);
+            // drawScoreBoard(opponents, ctx);
             for (var i = 0; i < opponents.length; i++) {
                 var color = colorArray[opponents[i].id % colorArray.length]
+                drawScoreBoard(opponents, ctx, i, color);
                 if (opponents[i].id != player.id)
                     draw(new Opponent(opponents[i], player.radius, color));
             }
@@ -142,6 +144,14 @@ export default class Game {
             var color = colorArray[id % colorArray.length];
             player.color = color;
             player.id = id;
+        }
+
+        function drawScoreBoard(opponents, ctx, i, color) {
+            // for(var i=0; i<opponents.length; i++){
+            ctx.font = "12px Arial";
+            ctx.fillStyle = color;
+            ctx.fillText(opponents[i].name + " - Cells: " + opponents[i].cellscontrolled + " Score: " + opponents[i].score, 20, 20 + 10 * i);
+            // }
         }
 
     }
