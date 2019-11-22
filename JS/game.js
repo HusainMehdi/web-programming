@@ -5,6 +5,7 @@ import Grid from './grid.js';
 import db from './dbcommands.js';
 import Opponent from './opponent.js';
 import Countdown from './countdown.js';
+// import work from './worker.js';
 
 export default class Game {
     /**The core game class which imports the various components of the game and renders them onto the canvas
@@ -34,11 +35,12 @@ export default class Game {
             db.removePlayerFromGame(player.username);
         }
 
+        let worker = new Worker('JS/worker.js')
         /** The main program loop. Executes all rendering, retrieves opponent and grid data from server in real time. functions with a dash behind them eg. _getTimeStamp
          * are throttled, meaning they have a minimum wait time between each request they can make to the server. This serves to improve performance and prevent 
          * overloading of browser resources.
          */
-        var interval = () => {
+        worker.onmessage = () => {
             this.clock++;
             //clear whole canvas before each draw
             ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -55,13 +57,9 @@ export default class Game {
             }
             db.updatePlayerStatus(player.username, player.x, player.y, updatePlayerStatus);
             _retrieveGrid(this.clock, 5);
-            grid.collisionDetection(player, player.id);
-            //recalls interval() continuously at approximately 60hz.
-            requestAnimationFrame(interval)
+            if (player.upPressed || player.downPressed || player.leftPressed || player.rightPressed)
+                grid.collisionDetection(player, player.id);
         };
-
-        //initiate the program loop
-        interval();
 
         /**renders a drawable object onto the canvas using it's stored information to determine it's location and visual attributes
          * @param  {} obj - The object to draw
@@ -81,7 +79,7 @@ export default class Game {
 
             function getTimeStamp(time) {
                 countdown.setTime(time);
-                console.log(countdown.time);
+                // console.log(countdown.time);
                 if (countdown.time < 2)
                     newRound();
             }
@@ -91,9 +89,9 @@ export default class Game {
          */
         function newRound() {
             //retrieve the name of the winner, increment their wins in the db
-            db.setWinner(player.username, updateScore);
+            db.setWinner(player.username, updateWinLoss);
 
-            function updateScore(winloss) {
+            function updateWinLoss(winloss) {
                 console.log(winloss);
                 player.wins = winloss.wins;
                 player.losses = winloss.losses;
@@ -147,11 +145,9 @@ export default class Game {
         }
 
         function drawScoreBoard(opponents, ctx, i, color) {
-            // for(var i=0; i<opponents.length; i++){
             ctx.font = "12px Arial";
             ctx.fillStyle = color;
             ctx.fillText(opponents[i].name + " - Cells: " + opponents[i].cellscontrolled + " Score: " + opponents[i].score, 20, 20 + 10 * i);
-            // }
         }
 
     }
