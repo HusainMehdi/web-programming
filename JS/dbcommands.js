@@ -18,7 +18,7 @@ class DBCommands {
         xhr.onload = function () {
             if (this.status == 200) {
                 var userAccount = JSON.parse(this.responseText);
-                if (userAccount.length == 0) {
+                if (userAccount == 0) {
                     document.querySelector('#loginStatusLabel').innerHTML = "Invalid username or password";
                 } else {
                     // startGame(userAccount[0]);
