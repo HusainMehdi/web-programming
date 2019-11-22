@@ -59,7 +59,7 @@ export default class Grid extends DrawableObject {
                 var cell = this.cells[c][r];
                 if (player.x > cell.x && player.x < cell.x + this.cellWidth && player.y > cell.y && player.y < cell.y + this.cellHeight) {
                     if (cell.owner != player.id) {
-                        console.log(cell.owner);
+                        // console.log(cell.owner);
                         db.updateGrid(player.id, c, r);
                     }
                 }

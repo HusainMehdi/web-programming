@@ -106,8 +106,12 @@ class DBCommands {
             if (this.status == 200) {
                 // console.log(this.responseText);
                 if (this.responseText != 0) {
-                    var playerData = JSON.parse(this.responseText);
-                    callback(playerData);
+                    try {
+                        var playerData = JSON.parse(this.responseText);
+                        callback(playerData);
+                    } catch (SyntaxError) {
+                        console.error(this.responseText);
+                    }
                 }
             }
         }
@@ -142,7 +146,11 @@ class DBCommands {
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.onload = function () {
             if (this.status == 200) {
-                // console.log(this.responseText);
+                try {
+
+                } catch (SyntaxError) {
+                    console.error(this.responseText);
+                }
             }
         }
         xhr.send(params);
