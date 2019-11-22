@@ -8,10 +8,11 @@ if (isset($_POST['username'])) {
     //convert POST variables to sql
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $hash = crypt($password, 'gridGame123456?');
 
     //queries for the db
     $select = "SELECT `username`, `password` FROM `accounts` WHERE `username`='$username';";
-    $insert = "INSERT INTO `accounts` (`username`,  `password`, `wins`, `losses`) VALUES ('$username', '$password', 0, 0);";
+    $insert = "INSERT INTO `accounts` (`username`,  `password`, `wins`, `losses`) VALUES ('$username', '$hash', 0, 0);";
 
     //result obtained by the select query
     $result = $conn->query($select);
