@@ -18,15 +18,14 @@ if (mysqli_query($conn, $cellsControlled)) {
 
 
     if (mysqli_query($conn, $update)) {
-
-        $setScore = "UPDATE `playersingame` SET `score`=`score`+1 WHERE `cellscontrolled` = (SELECT DISTINCT MAX(`cellscontrolled`) FROM (SELECT * FROM `playersingame`) AS x) ;";
+        $setScore = "UPDATE `playersingame` SET `score`=`score`+1 WHERE `name` = (SELECT `name` FROM `playersingame` WHERE `cellscontrolled` = (SELECT MAX(`cellscontrolled`) FROM `playersingame`));";
         if (mysqli_query($conn, $setScore)) {
             $result = $conn->query($select);
             $playerdata = mysqli_fetch_all($result, MYSQLI_ASSOC);
             echo json_encode($playerdata);
         } else if(mysqli_error($conn)) {
-            echo 'ERROR: setScore ' . mysqli_error($conn);
-            // echo 0;
+            // echo 'ERROR: setScore ' . mysqli_error($conn);
+            echo 0;
         }
     } else {
         echo 'ERROR: update ' . mysqli_error($conn);
