@@ -5,7 +5,7 @@ require('db.php');
 $username = mysqli_real_escape_string($conn, $_POST['username']);
 //queries for the db
 $setWin = "UPDATE `accounts` SET `wins`=`wins`+1 WHERE username = (SELECT `name` FROM `playersingame` WHERE `score` = (SELECT MAX(`score`) FROM `playersingame`));";
-$setLosses = "UPDATE `accounts` JOIN `playersingame` ON `accounts`.`username`=`playersingame`.`name` SET `losses`=`losses`+1 WHERE username != (SELECT `name` FROM (SELECt * FROM `playersingame`) AS x WHERE `score` = (SELECT MAX(`score`) FROM (SELECt * FROM `playersingame`) AS y));";
+$setLosses = "UPDATE `accounts` JOIN `playersingame` ON `accounts`.`username`=`playersingame`.`name` SET `losses`=`losses`+1 WHERE username != (SELECT `name` FROM `playersingame` WHERE `score` = (SELECT MAX(`score`) FROM `playersingame`));";
 $playerscore = "SELECT `wins`, `losses` FROM `accounts` WHERE `username` = '$username';";
 $resetScores = "UPDATE `playersIngame` SET `score` = 0;";
 $resetGrid = "UPDATE `grid` SET `owner` = -1;";
