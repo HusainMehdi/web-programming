@@ -18,7 +18,7 @@ class DBCommands {
         xhr.onload = function () {
             if (this.status == 200) {
                 var userAccount = JSON.parse(this.responseText);
-                if (userAccount.length == 0) {
+                if (userAccount == 0) {
                     document.querySelector('#loginStatusLabel').innerHTML = "Invalid username or password";
                 } else {
                     // startGame(userAccount[0]);
@@ -105,8 +105,14 @@ class DBCommands {
         xhr.onload = function () {
             if (this.status == 200) {
                 // console.log(this.responseText);
-                var playerData = JSON.parse(this.responseText);
-                callback(playerData);
+                if (this.responseText != 0) {
+                    try {
+                        var playerData = JSON.parse(this.responseText);
+                        callback(playerData);
+                    } catch (SyntaxError) {
+                        console.error(this.responseText);
+                    }
+                }
             }
         }
         xhr.send(params);
@@ -140,7 +146,11 @@ class DBCommands {
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.onload = function () {
             if (this.status == 200) {
-                console.log(this.responseText);
+                try {
+
+                } catch (SyntaxError) {
+                    console.error(this.responseText);
+                }
             }
         }
         xhr.send(params);
@@ -149,9 +159,8 @@ class DBCommands {
      * @param  {} callback - function to call when retrieval completes
      */
     retrieveGrid(callback) {
-        // var params = "&id=" + id + "&col=" + col + "&row=" + row;
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'PHP/retrieveGrid.php', true);
+        xhr.open('GET', 'PHP/retrieveGrid.php', true);
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.onload = function () {
             if (this.status == 200) {
@@ -161,6 +170,40 @@ class DBCommands {
             }
         }
         xhr.send();
+    }
+    /**Retrieves the current server time
+     * @param  {} callback - function to execute upon retrieval
+     */
+    getTimeStamp(callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'PHP/getTimeStamp.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onload = function () {
+            if (this.status == 200) {
+                // console.log("x" + this.responseText);
+                // var response = JSON.parse(this.responseText);
+                var response = this.responseText;
+                callback(response);
+            }
+        }
+        xhr.send();
+    }
+
+    setWinner(username, callback) {
+        console.log("someone won");
+        var params = "&username=" + username;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'PHP/setWinner.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onload = function () {
+            if (this.status == 200) {
+                // console.log(this.responseText);
+                // console.log(username);
+                var response = JSON.parse(this.responseText);
+                callback(response);
+            }
+        }
+        xhr.send(params);
     }
 }
 

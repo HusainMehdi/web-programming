@@ -15,16 +15,33 @@ if (isset($_POST['username'])) {
     //if no error, then username exists and return message "name already taken, try again"
 
 
-    $select = "SELECT `username` FROM `accounts` WHERE `username` = '$username' AND `password` = '$password';";
+    $select = "SELECT `username`, `wins`, `losses`  FROM `accounts` WHERE `username` = '$username';";
+    $getDBPassword = "SELECT `password` FROM `accounts` WHERE `username` = '$username';";
 
+    //Array returned by the db
+    $resultArray = mysqli_query($conn, $getDBPassword);
+    //convert array to php object
+    $obj = mysqli_fetch_all($resultArray, MYSQLI_ASSOC);
+    //retrieve the password from the php object
+    if ($obj != []) {
+        $dbPassword = $obj[0]["password"];
 
-    //send back the updated cell
-    if (mysqli_query($conn, $select)) {
-        $result = mysqli_query($conn, $select);
-        $account = mysqli_fetch_all($result, MYSQLI_ASSOC);
-        // echo 'account found';
-        echo json_encode($account);
-    } else {
-        echo 'ERROR: ' . mysqli_error($conn);
+        if (password_verify($password, $dbPassword)) {
+            if (mysqli_query($conn, $select)) {
+                $result = mysqli_query($conn, $select);
+                $account = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                // echo 'account found';
+                echo json_encode($account);
+            } else {
+                // echo 'ERROR: ' . mysqli_error($conn);
+                echo 0;
+            }
+        } else {
+            // echo 'ERROR: ' . mysqli_error($conn);
+            echo 0;
+        }
+    }
+    else{
+        echo 0;
     }
 }
