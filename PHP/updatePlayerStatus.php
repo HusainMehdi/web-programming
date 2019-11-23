@@ -15,19 +15,28 @@ if (mysqli_query($conn, $cellsControlled)) {
     $update = "UPDATE `playersingame` SET `x` =$x, `y`=$y, `cellscontrolled`=$cellsControlled WHERE `name` = '$name';";
     // Returns all players in descending order of score
     $select = "SELECT * FROM `playersingame` ORDER BY `score` DESC;";
+    $checkNumPlayers = "SELECT COUNT(*) AS total FROM `playersingame`;";
+    //get array from sql query
+    $sqlArray = mysqli_query($conn, $checkNumPlayers);
+    //convert to php associative array
+    $phpArray = mysqli_fetch_all($sqlArray, MYSQLI_ASSOC);
+    //retrieve total players in game as integer
+    $totalPlayers = $phpArray[0]["total"];
 
 
     if (mysqli_query($conn, $update)) {
 
         $setScore = "UPDATE `playersingame` SET `score`=`score`+1 WHERE `cellscontrolled` = (SELECT DISTINCT MAX(`cellscontrolled`) FROM (SELECT * FROM `playersingame`) AS x) ;";
-        if (mysqli_query($conn, $setScore)) {
-            $result = $conn->query($select);
-            $playerdata = mysqli_fetch_all($result, MYSQLI_ASSOC);
-            echo json_encode($playerdata);
-        } else if(mysqli_error($conn)) {
-            echo 'ERROR: setScore ' . mysqli_error($conn);
-            // echo 0;
-        }
+        // if (mysqli_query($conn, $setScore)) {
+        if ($totalPlayers > 1)
+            mysqli_query($conn, $setScore);
+        $result = $conn->query($select);
+        $playerdata = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        echo json_encode($playerdata);
+        // } else if (mysqli_error($conn)) {
+        // echo 'ERROR: setScore ' . mysqli_error($conn);
+        // echo 0;
+        // }
     } else {
         echo 'ERROR: update ' . mysqli_error($conn);
     }
