@@ -25,11 +25,11 @@ Jobs that need doing:
 
 Can be done without writing server side script:
 
-- Styling the html login system
+- ~~Styling the html login system~~ (Basically done but may add onto it)
 - Replacing the circle sprites with animated characters
 - Adding sounds / music
 - Adding Captcha box to login page to stop people spamming the db
-- Add instructions to the login page on how to play
+- ~~Add instructions to the login page on how to play~~ (Help page has been added)
 
 Requires Serverside Script:
 
