@@ -6,13 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css" type="text/css" media="screen">
-    <title>Game</title>
+    <title>Grid Conquest</title>
 
 </head>
 
 <body>
     <canvas id="canvas" width="560" height="560"></canvas>
 
+    <div id='gameTitle'>
+	<p>Grid Conquest</p>
     <div id='loginMenu'>
         <div id="login">
             <p>Login</p>
@@ -24,7 +26,7 @@
                 <label for="loginPasswordInput">Password</label>
                 <input type="password" id="loginPasswordInput">
             </div>
-            <div></div><button id="loginButton" type="button">Login</button>
+            <button id="loginButton" type="button">Login</button>
         </div>
         <label id="loginStatusLabel"></label>
         <div id="create">
@@ -42,6 +44,8 @@
         </div>
         <label id="createStatusLabel"></label>
     </div>
+	<a href="helppage.html" class="helpButton" style="background-color:#2979FF">Need help to play the game? Click here!</a>
 </body>
 <script type="module" src="JS/login.js"></script>
+<script type="module" src="JS/help.js"></script>
 </html>

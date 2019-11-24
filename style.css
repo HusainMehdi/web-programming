@@ -8,30 +8,229 @@
 html {
     touch-action: none;
 }
+
+#gameTitle{
+	position:fixed;
+	font-weight: bold;
+	font-size: x-large;
+	font-family: DejaVu Sans Mono, monospace;
+	color: blue;
+    text-align: top;
+	font-stretch: ultra-condensed;
+    right: 47%;
+    bottom: 70%;
+}
+
 #loginMenu{
     position:fixed;
     text-align: center;
-    left: 40%;
+	font-weight: normal;
+	font-size: medium;
+	font-family: Noto Sans, sans-serif;
+	color: black;
+    left: 42%;
     bottom: 50%;
 }
 
 #login {
     text-align: center;
     left: 40%;
+	font-weight: normal;
+	font-size: medium;
+	font-family: Noto Sans, sans-serif;
+	color: black;
     bottom: 75%;
+}
+	
 }
 #create {
     text-align: center;
+	font-weight: normal;
+	font-size: medium;
+	font-family: Noto Sans, sans-serif;
+	color: black;
     left: 40%;
     bottom: 50%;
 }
 
-canvas {
-    position: relative;
+#helpHeading1{
+	position:fixed;
+	font-weight: bold;
+	font-size: x-large;
+	font-family: DejaVu Sans Mono, monospace;
+	color: blue;
+    text-align: top;
+	font-stretch: ultra-condensed;
+    right: 42.5%;
+    bottom: 70%;
+}
+
+#information1{
+	position:fixed;
+	font-size: large;
+	font-family: Roboto, sans-serif;
+	color: black;
     text-align: center;
+	font-stretch: ultra-condensed;
+    right: 31%;
+    bottom: 64%;
+}
+
+#helpHeading2{
+	position:fixed;
+	font-weight: bold;
+	font-size: x-large;
+	font-family: DejaVu Sans Mono, monospace;
+	color: blue;
+    text-align: top;
+	font-stretch: ultra-condensed;
+    right: 47%;
+    bottom: 57%;
+}
+
+#information2{
+	position:fixed;
+	font-size: large;
+	font-family: Roboto, sans-serif;
+	color: black;
+    text-align: center;
+	font-stretch: ultra-condensed;
+	word-wrap: break-word;
+    right: 33%;
+    bottom: 52%;
+}
+
+#helpHeading3{
+	position:fixed;
+	font-weight: bold;
+	font-size: x-large;
+	font-family: DejaVu Sans Mono, monospace;
+	color: blue;
+    text-align: top;
+	font-stretch: ultra-condensed;
+    right: 47%;
+    bottom: 43%;
+}
+
+#information3{
+	position:fixed;
+	font-size: large;
+	font-family: Roboto, sans-serif;
+	color: black;
+    text-align: center;
+	font-stretch: ultra-condensed;
+	word-wrap: break-word;
+    right: 32%;
+    bottom: 49%;
+}
+
+#information4{
+	position:fixed;
+	font-size: large;
+	font-family: Roboto, sans-serif;
+	color: black;
+    text-align: center;
+	font-stretch: ultra-condensed;
+	word-wrap: break-word;
+    right: 32.5%;
+    bottom: 38%;
+}
+
+#information5{
+	position:fixed;
+	font-size: large;
+	font-family: Roboto, sans-serif;
+	color: black;
+    text-align: center;
+	font-stretch: ultra-condensed;
+	word-wrap: break-word;
+    right: 31.5%;
+    bottom: 35%;
+}
+
+#information6{
+	position:fixed;
+	font-size: large;
+	font-family: Roboto, sans-serif;
+	color: black;
+    text-align: center;
+	font-stretch: ultra-condensed;
+	word-wrap: break-word;
+    right: 44%;
+    bottom: 32%;
+}
+
+a.helpButton{
+ display: line-block;
+ padding:0.2em 1.2em;
+ margin:0 0.3em 0.3em 0;
+ border-radius:0.2em;
+ box-sizing: border-box;
+ text-decoration:none;
+ font-family:'Roboto',sans-serif;
+ font-weight:200;
+ font-size: 18px;
+ color:#FFFFFF;
+ background-color:#3369ff;
+ box-shadow:inset 0 -0.6em 1em -0.35em rgba(0,0,0,0.17),inset 0 0.6em 2em -0.3em rgba(255,255,255,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
+ text-align:center;
+ position:fixed;
+ width: 310px;
+ height: 30px;
+ bottom: 44%;
+ right: 43%;
+}
+a.helpButton:active{
+ box-shadow:inset 0 0.6em 2em -0.3em rgba(0,0,0,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
+}
+@media all and (max-width:30em){
+ a.helpButton{
+ display:block;
+ margin:0.4em auto;
+ }
+}
+
+a.helpButton2{
+ display: line-block;
+ padding:0.2em 1.2em;
+ margin:0 0.3em 0.3em 0;
+ border-radius:0.2em;
+ box-sizing: border-box;
+ text-decoration:none;
+ font-family:'Roboto',sans-serif;
+ font-weight:200;
+ font-size: 18px;
+ color:#FFFFFF;
+ background-color:#3369ff;
+ box-shadow:inset 0 -0.6em 1em -0.35em rgba(0,0,0,0.17),inset 0 0.6em 2em -0.3em rgba(255,255,255,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
+ text-align:center;
+ position:fixed;
+ width: 265px;
+ height: 30px;
+ bottom: 23%;
+ right: 44.5%;
+}
+a.helpButton2:active{
+ box-shadow:inset 0 0.6em 2em -0.3em rgba(0,0,0,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
+}
+@media all and (max-width:30em){
+ a.helpButton2{
+ display:block;
+ margin:0.4em auto;
+ }
+}
+
+canvas {
     padding: 0;
     margin: auto;
     display: block;
+    width: 800px;
+    height: 600px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 2%;
     background: #eee;
 }
 
