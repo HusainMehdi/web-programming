@@ -19,7 +19,7 @@ export default class Game {
         //list of opponents, updated and rendered to the canvas with each tick of interval()
         var opponents = [];
         //player colors
-        var colorArray = ["red", "orange", "blue", "green", "pink", "purple", "cyan", "yellow"];
+        var colorArray = ["red", "orange", "blue", "green", "pink", "purple", "cyan"];
         //The sprite you are in control of
         var player = new Player(canvas.width / 2, canvas.height / 2, userAccount);
         //add yourself to activeplayers in db
