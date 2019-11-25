@@ -8,8 +8,10 @@ require('db.php');
 //Check for POST variable
 if (isset($_POST['username'])) {
     // $hilighted = mysqli_real_escape_string($conn, $_POST['hilighted']);
-    $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $_POST['username']);
+    $username = mysqli_real_escape_string($conn, $username);
+    $password = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $_POST['password']);
+    $password = mysqli_real_escape_string($conn, $password);
 
     //make a query where you SELECT FROM ....WHERE username = &username.
     //if no error, then username exists and return message "name already taken, try again"
