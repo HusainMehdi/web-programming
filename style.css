@@ -9,17 +9,21 @@ html {
     touch-action: none;
 }
 
+/* This generates the game title for the login page - styles it blue and uses DejaVu Sans Mono as a font*/
+
 #gameTitle{
 	position:fixed;
 	font-weight: bold;
 	font-size: x-large;
 	font-family: DejaVu Sans Mono, monospace;
 	color: blue;
-    text-align: top;
+  text-align: top;
 	font-stretch: ultra-condensed;
     right: 47%;
     bottom: 70%;
 }
+
+/* This generates the CSS for the overall login menu - uses Noto Sans for a font and colors it black */
 
 #loginMenu{
     position:fixed;
@@ -32,6 +36,8 @@ html {
     bottom: 50%;
 }
 
+/* This generates the CSS for the login div - uses Noto Sans for a font and colors it black */
+
 #login {
     text-align: center;
     left: 40%;
@@ -41,7 +47,9 @@ html {
 	color: black;
     bottom: 75%;
 }
-	
+
+/* This generates the CSS for the account creation div - uses Noto Sans for a font and colors it black */
+
 #create {
     text-align: center;
 	font-weight: normal;
@@ -51,6 +59,8 @@ html {
     left: 40%;
     bottom: 50%;
 }
+
+/* This generates the CSS for the top heading on the help page - uses DejaVu Sans Mono for a font and colors it blue, also stretching the text for emphasis and positions it above the other headings and information */
 
 #helpHeading1{
 	position:fixed;
@@ -64,6 +74,8 @@ html {
     bottom: 70%;
 }
 
+/* This generates the CSS for the first information div - uses Roboto for a font and colors it black, also stretching the text for emphasis */
+
 #information1{
 	position:fixed;
 	font-size: large;
@@ -74,6 +86,8 @@ html {
     right: 31%;
     bottom: 64%;
 }
+
+/* This generates the CSS for the first subheading on the help page - uses DejaVu Sans Mono for a font and colors it blue, also stretching the text for emphasis */
 
 #helpHeading2{
 	position:fixed;
@@ -87,6 +101,8 @@ html {
     bottom: 57%;
 }
 
+/* This generates the CSS for the second information div - uses Roboto for a font and colors it black, also stretching the text for emphasis */
+
 #information2{
 	position:fixed;
 	font-size: large;
@@ -98,6 +114,8 @@ html {
     right: 33%;
     bottom: 52%;
 }
+
+/* This generates the CSS for the second subheading on the help page - uses DejaVu Sans Mono for a font and colors it blue, also stretching the text for emphasis */
 
 #helpHeading3{
 	position:fixed;
@@ -111,6 +129,8 @@ html {
     bottom: 43%;
 }
 
+/* This generates the CSS for the third information div - uses Roboto for a font and colors it black, also stretching the text for emphasis */
+
 #information3{
 	position:fixed;
 	font-size: large;
@@ -122,6 +142,8 @@ html {
     right: 32%;
     bottom: 49%;
 }
+
+/* This generates the CSS for the fourth information div - uses Roboto for a font and colors it black, also stretching the text for emphasis */
 
 #information4{
 	position:fixed;
@@ -135,6 +157,8 @@ html {
     bottom: 38%;
 }
 
+/* This generates the CSS for the fifth information div - uses Roboto for a font and colors it black, also stretching the text for emphasis */
+
 #information5{
 	position:fixed;
 	font-size: large;
@@ -147,6 +171,8 @@ html {
     bottom: 35%;
 }
 
+/* This generates the CSS for the sixth information div - uses Roboto for a font and colors it black, also stretching the text for emphasis */
+
 #information6{
 	position:fixed;
 	font-size: large;
@@ -158,6 +184,8 @@ html {
     right: 44%;
     bottom: 32%;
 }
+
+/* This creates CSS for the button that takes you to the help page. The CSS here makes the button stand out for usability purposes by colouring it blue in contrast to the grey canvas, having white text on a blue background and positioning it in the center of the page. */
 
 a.helpButton{
  display: line-block;
@@ -175,19 +203,27 @@ a.helpButton{
  text-align:center;
  position:fixed;
  width: 310px;
- height: 30px;
- bottom: 44%;
+ height: 50px;
+ bottom: 42%;
  right: 43%;
 }
+
+/* This changes the help buttons apperance to be slightly darker if it is clicked. */
+
 a.helpButton:active{
  box-shadow:inset 0 0.6em 2em -0.3em rgba(0,0,0,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
 }
+
+/* This displays the button as a block and gives it a margin so that it doesn't intersect with other elements on the page.*/
+
 @media all and (max-width:30em){
  a.helpButton{
  display:block;
  margin:0.4em auto;
  }
 }
+
+/* CSS for the button on the help page to take you back to the login page - virtually identical to the first help button CSS */
 
 a.helpButton2{
  display: line-block;
@@ -209,9 +245,15 @@ a.helpButton2{
  bottom: 23%;
  right: 44.5%;
 }
+
+/* See helpbutton CSS for this section above */
+
 a.helpButton2:active{
  box-shadow:inset 0 0.6em 2em -0.3em rgba(0,0,0,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
 }
+
+/* See helpbutton CSS for this section above */
+
 @media all and (max-width:30em){
  a.helpButton2{
  display:block;
@@ -219,12 +261,12 @@ a.helpButton2:active{
  }
 }
 
+/* Creates the canvas for the game itself */
+
 canvas {
     padding: 0;
     margin: auto;
     display: block;
-    /* width: 800px;
-    height: 600px; */
     position: absolute;
     top: 0;
     bottom: 0;
@@ -233,10 +275,11 @@ canvas {
     background: #eee;
 }
 
+/* This creates the default font for the website and creates padding and margins to avoid intersections between elements*/
+
 body {
 
     padding: 0;
     margin: 0;
     font-family: Helvetica Neue, Helvetica, Arial;
 }
-
