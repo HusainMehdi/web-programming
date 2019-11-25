@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!--This defines information we are using in the structure of the website and imports the CSS used in the website-->    
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,44 +11,56 @@
     <title>Grid Conquest</title>
 
 </head>
-
+    
 <body>
+    <!--This sets the height and width of the canvas to 560px each-->
     <canvas id="canvas" width="560" height="560"></canvas>
 
-    
+    <!--This creates the login menu - used to log in, create accounts and go to a help page-->
     <div id='loginMenu'>
+            <!--Creates a div element called gameTitle to store the game title, which is in a paragraph tag itself-->
             <div id='gameTitle'></div>
             <p>Grid Conquest</p>
+        <!--This div element houses the login section, first having a paragraph that states that it is for logging into the game-->
         <div id="login">
             <p>Login</p>
+             <!--This div element takes in the username from the player-->
             <div id="username">
                 <label for="loginUserNameInput">Username</label>
                 <input type="text" id="loginUserNameInput">
             </div>
+            <!--This div element takes in the password from the player-->
             <div id="password">
                 <label for="loginPasswordInput">Password</label>
                 <input type="password" id="loginPasswordInput">
             </div>
+            <!--This div element is a login button which takes the user to the game using JavaScript when the button is clicked and the account is found-->
             <button id="loginButton" type="button">Login</button>
         </div>
+        <!--This label element states any potential errors or complications, for instance the password being incorrect-->
         <label id="loginStatusLabel"></label>
+        <!--This div element is used for account creating, first having a paragraph that states that it is for account creation-->
         <div id="create">
             <p>Create Account</p>
+            <!--This div element takes in the username from the player-->
             <div id="username">
                 <label for="createUserNameInput">Username</label>
                 <input id="createUserNameInput" type="text">
             </div>
+            <!--This div element takes in the password from the player-->
             <div id="password">
                 <label for="createPasswordInput">Password</label>
                 <input id="createPasswordInput" type="password">
-
             </div>
+            <!--This button allows for the account to be created and stored in a database when the button is clicked.-->
             <button id="createButton" type="button">Create</button>
         </div>
+        <!--This label element states any potential errors or complications, i.e. if a username is taken-->
         <label id="createStatusLabel"></label>
+        <!--This button is used to go the the help page, and features styling such as making the background colour blue so it stands out-->
         <a href="helppage.html" class="helpButton" style="background-color:#2979FF">Need help to play the game? Click here!</a>
     </div>
 </body>
+<!--The JavaScript for the login page is called here-->
 <script type="module" src="JS/login.js"></script>
-<script type="module" src="JS/help.js"></script>
 </html>
