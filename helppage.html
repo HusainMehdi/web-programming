@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!--This defines information we are using in the structure of the website and imports the CSS used in the website-->    	
+	
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,42 +13,60 @@
 </head>
 
 <body>
+    <!--This sets the height and width of the canvas to 560px each-->
     <canvas id="canvas" width="560" height="560"></canvas>
 	
+	 <!--This creates the first heading to inform players about the game-->
 	<div id='helpHeading1'>
 	<p><h3>What is Grid Conquest?</h3></p>
 	</div>
+	
+	<!--This creates the first information div element to inform players about what the game is, using a paragraph tag-->
 	<div id='information1'>
 	<p>Grid Conquest is a game where you must manouver your circle across a grid in order
 	   to claim squares so you can win.</p>
 	</div>
+	
+        <!--This creates the first subheading to inform players about how to play the game, using a smaller heading size-->
 	<div id='helpHeading2'>
 	<p><h4>How do I play?</h4></p>
 	</div>
+
+        <!--This creates the second information div element to inform players about how to play the game, using a paragraph tag-->
 	<div id='information2'>
 	<p>Use the arrow keys to move the circle around the grid. If your circle touches a square,
 	 you claim that square.</p>
 	</div>
+
+        <!--This creates the third information div element to further inform players about how to play the game, using a paragraph tag-->
 	<div id='information3'>
 	<p>Opponents may claim your squares, but you can move
 	your circle back onto the square in question to take it back.</p>
 	</div>
+
+        <!--This creates the second subheading to inform players about how to win the game, using a smaller heading size-->
 	<div id='helpHeading3'>
 	<p><h4>How do I win?</h4></p>
 	</div>
+
+        <!--This creates the fourth information div element to inform players about how to win the game, using a paragraph tag-->
 	<div id='information4'>
 	<p>For each square you have, you gain points. There is a time limit of 60 seconds in each round
 	of Grid Conquest.</p>
 	</div>
+
+        <!--This creates the fifth information div element to further inform players about how to win the game, using a paragraph tag-->
 	<div id='information5'>
 	<p>To win, you must have the most points out of all players by the end of the time limit. 
 	If you win, your wins go up by 1.</p>
 	</div>
+
+        <!--This creates the sixth information div element to further inform players about how to win the game, using a paragraph tag-->
 	<div id='information6'>
 	<p>The grid then resets so you can play again.</p>
 	</div>
 
+        <!--This creates a button which takes the user back to the login page, also staying consistent using the blue background for emphasis-->
 	<a href="index.html" class="helpButton2" style="background-color:#2979FF">Click to return to login page</a>
 </body>
-<script type="module" src="JS/returnhelp.js"></script>
 </html>
