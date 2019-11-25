@@ -35,7 +35,10 @@ class DBCommands {
     addAccount(callback) {
         var username = document.querySelector('#createUserNameInput').value;
         var password = document.querySelector('#createPasswordInput').value;
-        if (username != "" && password != "") {
+        if(password.length < 8){
+            document.querySelector('#createStatusLabel').innerHTML = "Password must be 8 characters or more.";
+        }
+        else if (username != "" && password != "") {
             //convert data to named strings which PHP will recognise
             var params = "&username=" + username + "&password=" + password;
             var xhr = new XMLHttpRequest();
